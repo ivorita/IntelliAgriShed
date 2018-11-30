@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@android:color/white"
+        android:layout_marginTop="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/network_state"
+            android:background="@drawable/text_background"
+            android:layout_margin="10dp"
+            android:paddingStart="5dp"
+            style="@style/Black_Text_16"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/connect_state"
+                android:layout_margin="10dp"
+                android:paddingStart="5dp"
+                style="@style/Black_Text_16" />
+
+            <TextView
+                android:id="@+id/deviceState"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="未连接"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                style="@style/Black_Text_16" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@android:color/white"
+        android:layout_marginTop="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/param_setting"
+            android:background="@drawable/text_background"
+            android:layout_margin="10dp"
+            android:paddingLeft="5dp"
+            style="@style/Black_Text_16"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ip"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:paddingLeft="5dp"
+                style="@style/Black_Text_16"/>
+
+            <EditText
+                android:id="@+id/IpAddress1"
+                android:layout_width="@dimen/edit_text_width_ip"
+                android:layout_height="38dp"
+                android:inputType="number"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:layout_marginBottom="5dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dot"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                style="@style/Black_Text_16"/>
+
+            <EditText
+                android:id="@+id/IpAddress2"
+                android:layout_width="@dimen/edit_text_width_ip"
+                android:layout_height="38dp"
+                android:inputType="number"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:layout_marginBottom="5dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dot"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                style="@style/Black_Text_16"/>
+
+            <EditText
+                android:id="@+id/IpAddress3"
+                android:layout_width="@dimen/edit_text_width_ip"
+                android:layout_height="38dp"
+                android:inputType="number"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:layout_marginBottom="5dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dot"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                style="@style/Black_Text_16"/>
+
+            <EditText
+                android:id="@+id/IpAddress4"
+                android:layout_width="@dimen/edit_text_width_ip"
+                android:layout_height="38dp"
+                android:inputType="number"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:layout_marginBottom="5dp"/>
+
+        </LinearLayout>
+
+        <View style="@style/setting_divider_style"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="目标端口："
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:paddingLeft="5dp"
+                style="@style/Black_Text_16"/>
+
+            <EditText
+                android:id="@+id/PortNumber"
+                android:layout_width="@dimen/edit_text_width_other"
+                android:layout_height="38dp"
+                android:inputType="number"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"/>
+
+        </LinearLayout>
+
+        <View style="@style/setting_divider_style"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TCP超时时间："
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:paddingLeft="5dp"
+                style="@style/Black_Text_16"/>
+
+            <EditText
+                android:id="@+id/TCPKeepAlive"
+                android:layout_width="@dimen/edit_text_width_other"
+                android:layout_height="38dp"
+                android:inputType="number"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="秒"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                style="@style/Black_Text_16"/>
+
+        </LinearLayout>
+
+        <View style="@style/setting_divider_style"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TCP发送间隔："
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:paddingLeft="5dp"
+                style="@style/Black_Text_16"/>
+
+            <EditText
+                android:id="@+id/SendTimeInterval"
+                android:layout_width="@dimen/edit_text_width_other"
+                android:layout_height="38dp"
+                android:inputType="number"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="秒"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                style="@style/Black_Text_16"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_margin="4dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <Button
+            style="?android:attr/buttonBarButtonStyle"
+            android:id="@+id/save"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:background="@drawable/save"
+            android:text="@string/save_confirm"
+            android:textSize="14sp"
+            android:textColor="@android:color/black"
+            android:layout_marginEnd="10dp"/>
+
+        <Button
+            android:id="@+id/restore"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:background="@drawable/restore"
+            android:text="@string/restore"
+            android:textSize="14sp"
+            android:textColor="@android:color/white"
+            android:layout_marginStart="10dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

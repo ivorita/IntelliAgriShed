@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">智能农业</string>
+    <string name="title_env">环境监测</string>
+    <string name="title_remote">远程控制</string>
+    <string name="title_params">参数设定</string>
+    <string name="save_confirm">确认保存</string>
+    <string name="restore">恢复默认</string>
+    <string name="param_setting">参数设定</string>
+    <string name="network_state">网络状态</string>
+    <string name="connect_state">连接状态：</string>
+    <string name="dot">.</string>
+    <string name="ip">IP地址：</string>
+</resources>

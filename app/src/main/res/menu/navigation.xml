@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_env"
+        android:icon="@drawable/env_det"
+        android:title="@string/title_env" />
+
+    <item
+        android:id="@+id/navigation_remote"
+        android:icon="@drawable/remote"
+        android:title="@string/title_remote" />
+
+    <item
+        android:id="@+id/navigation_params"
+        android:icon="@drawable/param"
+        android:title="@string/title_params" />
+
+</menu>
