@@ -7,7 +7,52 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="空气环境"
+        android:text="@string/air_environ"
+        android:background="@drawable/text_background"
+        android:layout_margin="10dp"
+        android:paddingStart="5dp"
+        style="@style/Black_Text_16"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="15dp">
+
+        <TextView
+            android:id="@+id/temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="温度"/>
+
+        <TextView
+            android:id="@+id/temp_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0℃"
+            android:layout_below="@id/temp"/>
+
+        <TextView
+            android:id="@+id/humidity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="湿度"
+            android:layout_toEndOf="@id/temp"
+            android:layout_marginStart="5dp"/>
+
+        <TextView
+            android:id="@+id/humidity_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/humidity"
+            android:layout_alignStart="@id/humidity"
+            android:text="0%" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/soil_environ"
         android:background="@drawable/text_background"
         android:layout_margin="10dp"
         android:paddingStart="5dp"
@@ -16,16 +61,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="土壤环境"
-        android:background="@drawable/text_background"
-        android:layout_margin="10dp"
-        android:paddingStart="5dp"
-        style="@style/Black_Text_16"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="灌溉环境"
+        android:text="@string/irrigation_environ"
         android:background="@drawable/text_background"
         android:layout_margin="10dp"
         android:paddingStart="5dp"
