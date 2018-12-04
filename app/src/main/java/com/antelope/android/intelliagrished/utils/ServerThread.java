@@ -1,5 +1,6 @@
 package com.antelope.android.intelliagrished.utils;
 
+import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
@@ -17,6 +18,7 @@ public class ServerThread extends Thread {
     private OutputStream out;
     private boolean First_Create_TCP = false;
     TCPUDInfo mTCPUDInfo = new TCPUDInfo();
+    private static Handler mHandler;
 
     @Override
     public void run() {
@@ -34,7 +36,7 @@ public class ServerThread extends Thread {
                             //处理03数据
                             Message msg3 = new Message();
                             msg3.what = 0xfffd;
-                            TCPUDInfo.mHandler.sendMessage(msg3);
+                            mHandler.sendMessage(msg3);
 
                             mTCPUDInfo.SendRelayState();
                             //发送基本03信息
@@ -72,7 +74,7 @@ public class ServerThread extends Thread {
 
                 Message msg1 = new Message();
                 msg1.what = 0xffff;
-                TCPUDInfo.mHandler.sendMessage(msg1);    //服务器连接成功！
+                mHandler.sendMessage(msg1);    //服务器连接成功！
 
                 //第一次连接成功，则显示true,此后该变量值不变
                 First_Create_TCP = true;

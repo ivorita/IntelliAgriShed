@@ -4,12 +4,12 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +22,8 @@ import android.widget.Toast;
 import com.antelope.android.intelliagrished.R;
 import com.antelope.android.intelliagrished.utils.ServerThread;
 import com.antelope.android.intelliagrished.utils.TCPUDInfo;
+
+import java.lang.ref.WeakReference;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -84,6 +86,8 @@ public class paramFragment extends Fragment {
 
         return view;
     }
+
+
 
     @Override
     public void onDestroyView() {
@@ -213,4 +217,70 @@ public class paramFragment extends Fragment {
         mSendTimeInterval.setText(String.valueOf(TCPUDInfo.SendTimeInterval / 1000));
     }
 
+    /*private static class MyHandler extends Handler{
+
+        //弱引用
+        WeakReference<paramFragment> mTarget;
+
+        public MyHandler(paramFragment fragment) {
+            mTarget = new WeakReference<paramFragment>(fragment);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what){
+                case 0xffff:
+                    mDeviceState.setText("服务器连接成功");
+                    break;
+                case 0xfffe:
+                    mDeviceState.setText("服务器未开启/断网");
+                    break;
+                case 0xfffd:
+                    mDeviceState.setText("正常收发数据");
+                    break;
+                case 0xfffc:
+                    mDeviceState.setText("服务器断开稍后重试");
+                    break;
+                default:
+                    super.handleMessage(msg);
+                    break;
+            }
+        }
+    }*/
+
+    /**
+     * Fragment is active.
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
+        TCPUDInfo.mHandler = new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                switch (msg.what){
+                    case 0xffff:
+                        mDeviceState.setText("服务器连接成功");
+                        break;
+                    case 0xfffe:
+                        mDeviceState.setText("服务器未开启/断网");
+                        break;
+                    case 0xfffd:
+                        mDeviceState.setText("正常收发数据");
+                        break;
+                    case 0xfffc:
+                        mDeviceState.setText("服务器断开稍后重试");
+                        break;
+                    default:
+                        super.handleMessage(msg);
+                        break;
+                }
+            }
+        };
+        /*mMyHandler.post(new Runnable() {
+            @Override
+            public void run() {
+            }
+        });*/
+
+    }
 }

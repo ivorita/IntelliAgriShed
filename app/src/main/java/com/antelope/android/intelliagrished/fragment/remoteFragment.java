@@ -229,4 +229,9 @@ public class remoteFragment extends Fragment {
         Timer time = new Timer();
         time.schedule(new WriteCmdTask(), 1000, 2000);
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 }

@@ -25,7 +25,7 @@ public class TCPUDInfo {
     //设备连接状态
     public static boolean DeviceState = false;
 
-    static Handler mHandler;
+    public static Handler mHandler;
 
     // 发送队列,每次定时器会检索发送队列里的数据，如果非零（则取1-15，用来操作1号到15号继电器）数量暂定20
     public static int[] WriteArray = new int[20];
