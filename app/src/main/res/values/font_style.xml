@@ -1,25 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Black_Text_16">
-        <item name="android:textColor">@android:color/black</item>
-        <item name="android:textSize">16sp</item>
-    </style>
-
-    <style name="Black_Text_34">
+    <style name="Black_Bold_Text_34">
         <item name="android:textColor">@android:color/black</item>
         <item name="android:textSize">34sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="Gray_Text_16">
+    <style name="Green_Drak_Bold_Text_34">
+        <item name="android:textColor">@android:color/holo_green_dark</item>
+        <item name="android:textSize">34sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Black_Text_30">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">30sp</item>
+    </style>
+
+    <style name="Black_Text_24">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="Black_Text_16">
         <item name="android:textColor">@android:color/black</item>
         <item name="android:textSize">16sp</item>
     </style>
 
+    <style name="Green_Dark_Text_16">
+        <item name="android:textColor">@android:color/holo_green_dark</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="Green_Text_16">
+        <item name="android:textColor">@android:color/holo_green_light</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="Gray_Text_16">
+        <item name="android:textColor">@android:color/darker_gray</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
     <style name="Gray_Text_14">
-        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textColor">@android:color/darker_gray</item>
         <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Green_Text_10">
+        <item name="android:textColor">@android:color/holo_green_light</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="Gray_Text_8">
+        <item name="android:textColor">@android:color/darker_gray</item>
+        <item name="android:textSize">8sp</item>
     </style>
 
 </resources>

@@ -1,5 +1,6 @@
 package com.antelope.android.intelliagrished.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -29,7 +30,6 @@ import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import butterknife.Unbinder;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -52,6 +52,8 @@ public class envFragment extends Fragment {
     TextView mWeatherInfo;
     @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout mSwipeRefresh;
+
+    private SharedPreferences sharedPreferences;
 
     public static envFragment newInstance() {
         envFragment fragment = new envFragment();
@@ -94,11 +96,11 @@ public class envFragment extends Fragment {
             mInfoText.setText(dailyForecast.more.info);
 
             int min = Integer.parseInt(dailyForecast.temperature.min);
-            String min_tmp = getString(R.string.tmp_value, min);
+            String min_tmp = getString(R.string.weather_tmp_value, min);
             mMinText.setText(min_tmp);
 
             int max = Integer.parseInt(dailyForecast.temperature.max);
-            String max_tmp = getString(R.string.tmp_value, max);
+            String max_tmp = getString(R.string.weather_tmp_value, max);
             mMaxText.setText(max_tmp);
 
             mForecastLayout.addView(view);
@@ -176,7 +178,6 @@ public class envFragment extends Fragment {
         TCPUDInfo.mHandler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
-                super.handleMessage(msg);
                 switch (msg.what) {
                     case 0x0010:
                         if (msg.arg1 > 100) {
@@ -187,6 +188,24 @@ public class envFragment extends Fragment {
                             msg.arg2 = 100;
                         }
                         mHumidityValue.setText(Integer.toString(msg.arg2) + "%"); // 空气环境：湿度
+                        break;
+                    /*case 0x0011:
+                        Base_03.setText(Integer.toString(msg.arg1) + "Lux"); // 空气环境：光照
+                        Base_04.setText(Integer.toString(msg.arg2) + "ppm"); // 空气环境：二氧化碳
+                        break;
+                    case 0x0012:
+                        Base_05.setText(Integer.toString(msg.arg1) + "℃"); // 土壤环境：温度
+                        Base_06.setText(Integer.toString(msg.arg2) + "%"); // 土壤环境：湿度
+                        break;
+                    case 0x0013:
+                        Base_07.setText(Double.toString((double) msg.arg1 / 10) + "mS/cm"); // 土壤环境：盐溶解度
+                        Base_08.setText(Double.toString((double) msg.arg2 / 10)); // 土壤环境：PH值
+                        break;
+                    case 0x0014:
+                        Base_09.setText(Integer.toString(msg.arg1) + "cm"); // 灌溉环境：水箱水位
+                        break;*/
+                    default:
+                        super.handleMessage(msg);
                         break;
                 }
             }
@@ -199,6 +218,31 @@ public class envFragment extends Fragment {
             }
         });
 
+    }
+
+    //存储数据，下次进入时恢复显示
+    @Override
+    public void onPause() {
+        super.onPause();
+        sharedPreferences = getActivity().getSharedPreferences("envParams", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        //空气温度
+        editor.putString("temp_air","");
+        //空气湿度
+        editor.putString("humidity_air","");
+        //光照强度
+        editor.putString("illumination","");
+        //CO2浓度
+        editor.putString("CO2_concentration","");
+        //土壤温度
+        editor.putString("temp_soil","");
+        //土壤湿度
+        editor.putString("humidity_soil","");
+        //盐溶解度
+        editor.putString("salt_solubility","");
+        //pH值
+        editor.putString("pH_value","");
+        editor.apply();
     }
 
     @Override
