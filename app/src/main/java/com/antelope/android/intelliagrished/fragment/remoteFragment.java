@@ -234,4 +234,5 @@ public class remoteFragment extends Fragment {
     public void onResume() {
         super.onResume();
     }
+
 }

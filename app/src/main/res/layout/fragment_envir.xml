@@ -2,69 +2,90 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_margin="10dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/air_environ"
-        android:background="@drawable/text_background"
-        android:layout_margin="10dp"
-        android:paddingStart="5dp"
-        style="@style/Black_Text_16"/>
-
-    <RelativeLayout
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingStart="15dp">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/temp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="温度"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/temp_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0℃"
-            android:layout_below="@id/temp"/>
+            <include layout="@layout/forecast"/>
 
-        <TextView
-            android:id="@+id/humidity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="湿度"
-            android:layout_toEndOf="@id/temp"
-            android:layout_marginStart="5dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/air_environ"
+                android:background="@drawable/text_background"
+                android:layout_margin="10dp"
+                android:paddingStart="5dp"
+                style="@style/Black_Text_16"/>
 
-        <TextView
-            android:id="@+id/humidity_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/humidity"
-            android:layout_alignStart="@id/humidity"
-            android:text="0%" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="15dp">
 
-    </RelativeLayout>
+                <TextView
+                    android:id="@+id/temp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="温度"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/soil_environ"
-        android:background="@drawable/text_background"
-        android:layout_margin="10dp"
-        android:paddingStart="5dp"
-        style="@style/Black_Text_16"/>
+                <TextView
+                    android:id="@+id/temp_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0℃"
+                    android:layout_below="@id/temp"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/irrigation_environ"
-        android:background="@drawable/text_background"
-        android:layout_margin="10dp"
-        android:paddingStart="5dp"
-        style="@style/Black_Text_16"/>
+                <TextView
+                    android:id="@+id/humidity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="湿度"
+                    android:layout_toEndOf="@id/temp"
+                    android:layout_marginStart="5dp"/>
+
+                <TextView
+                    android:id="@+id/humidity_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/humidity"
+                    android:layout_alignStart="@id/humidity"
+                    android:text="0%" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/soil_environ"
+                android:background="@drawable/text_background"
+                android:layout_margin="10dp"
+                android:paddingStart="5dp"
+                style="@style/Black_Text_16"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/irrigation_environ"
+                android:background="@drawable/text_background"
+                android:layout_margin="10dp"
+                android:paddingStart="5dp"
+                style="@style/Black_Text_16"/>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+
+
+
 
 </LinearLayout>

@@ -23,13 +23,13 @@ import com.antelope.android.intelliagrished.R;
 import com.antelope.android.intelliagrished.utils.ServerThread;
 import com.antelope.android.intelliagrished.utils.TCPUDInfo;
 
-import java.lang.ref.WeakReference;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 public class paramFragment extends Fragment {
+
+    private static final String TAG = "paramFragment";
 
     String[] IPSplit = new String[4];
 
@@ -80,14 +80,12 @@ public class paramFragment extends Fragment {
             mDeviceState.setText("软件初始化完毕");
         }
 
-        InitSaveDialog();
+        SaveDialog();
 
         InitConfig();
 
         return view;
     }
-
-
 
     @Override
     public void onDestroyView() {
@@ -95,7 +93,8 @@ public class paramFragment extends Fragment {
         unbinder.unbind();
     }
 
-    private void InitSaveDialog() {
+    //修改保存对话框
+    private void SaveDialog() {
         SaveDialog = new AlertDialog.Builder(getContext()).setCancelable(false) // 屏幕外部区域点击无效
                 .setTitle("提示：").setMessage("确认要保存吗？").setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
@@ -109,7 +108,6 @@ public class paramFragment extends Fragment {
                             Toast.makeText(getContext(), "参数不能为空！", Toast.LENGTH_SHORT).show();
                         } else if ((Integer.parseInt(mTCPKeepAlive.getText().toString()) < 10)
                                 || (Integer.parseInt(mSendTimeInterval.getText().toString()) < 1)) {
-
                             Toast.makeText(getContext(), "发送间隔最少设置1秒钟，超时时间最少设置10秒钟，请修改", Toast.LENGTH_SHORT)
                                     .show();
                         } else {
@@ -138,7 +136,7 @@ public class paramFragment extends Fragment {
 
                             editor.apply();
 
-                            Toast.makeText(getContext(), "设置成功！重新连接", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "设置成功，重新连接中。", Toast.LENGTH_SHORT).show();
                             if (!TCPUDInfo.DeviceState) {
                                 mDeviceState.setText("网络未开或服务器关");
                             } else {
@@ -155,6 +153,7 @@ public class paramFragment extends Fragment {
                 }).create();
     }
 
+    //初始化参数设置
     private void InitConfig() {
         // 如果不存在，系统会自己创建
         sharedPreferences = getActivity().getSharedPreferences("TCPData", Activity.MODE_PRIVATE);
@@ -164,7 +163,7 @@ public class paramFragment extends Fragment {
         if (TCPUDInfo.IpAddress.equals("")) {
             SharedPreferences mySharedPreferences = getActivity().getSharedPreferences("TCPData", Activity.MODE_PRIVATE);
             SharedPreferences.Editor editor = mySharedPreferences.edit();
-            editor.putString("IPAddress", "192.168.10.10");
+            editor.putString("IPAddress", "192.168.200.20");
             editor.apply();
             // 读当前IP地址
             TCPUDInfo.IpAddress = sharedPreferences.getString("IPAddress", "");
@@ -200,7 +199,6 @@ public class paramFragment extends Fragment {
             SharedPreferences.Editor editor = mySharedPreferences.edit();
             editor.putString("SendTimeInterval", "3000");
             editor.apply();
-
         }
         TCPUDInfo.SendTimeInterval = Integer
                 .parseInt(sharedPreferences.getString("SendTimeInterval", "")); // 读当前TCP超时时间
@@ -208,6 +206,7 @@ public class paramFragment extends Fragment {
 
 
         IPSplit = TCPUDInfo.IpAddress.split("\\.");
+        Log.i(TAG, "InitConfig: " + IPSplit[0] + IPSplit[1] + IPSplit[2] + IPSplit[3]);
         mIpAddress1.setText(IPSplit[0]);
         mIpAddress2.setText(IPSplit[1]);
         mIpAddress3.setText(IPSplit[2]);
@@ -217,7 +216,83 @@ public class paramFragment extends Fragment {
         mSendTimeInterval.setText(String.valueOf(TCPUDInfo.SendTimeInterval / 1000));
     }
 
-    /*private static class MyHandler extends Handler{
+    /**
+     * Fragment is active.
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        //保存修改
+        mSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SaveDialog.show();
+            }
+        });
+
+        //恢复默认
+        mRestore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //恢复默认值
+                SharedPreferences mySharedPreferences = getActivity().getSharedPreferences("TCPData", Activity.MODE_PRIVATE);
+                SharedPreferences.Editor editor = mySharedPreferences.edit();
+                editor.putString("IPAddress", "192.168.200.20");
+                editor.putString("PortNumber", "60000");
+                editor.putString("TCPKeepAlive", "30000");
+                editor.putString("SendTimeInterval", "3000");
+                editor.apply();
+
+                //读取放置的默认值
+                TCPUDInfo.IpAddress = sharedPreferences.getString("IPAddress", "");
+                TCPUDInfo.PortNumber = Integer.parseInt(sharedPreferences.getString("PortNumber", ""));
+                TCPUDInfo.TCPKeepAlive = Integer.parseInt(sharedPreferences.getString("TCPKeepAlive", ""));
+                TCPUDInfo.SendTimeInterval = Integer
+                        .parseInt(sharedPreferences.getString("SendTimeInterval", ""));
+
+                IPSplit = TCPUDInfo.IpAddress.split("\\.");
+                mIpAddress1.setText(IPSplit[0]);
+                Log.i(TAG, "onClick: " + IPSplit[3]);
+                mIpAddress2.setText(IPSplit[1]);
+                mIpAddress3.setText(IPSplit[2]);
+                mIpAddress4.setText(IPSplit[3]);
+                mPortNumber.setText(String.valueOf(TCPUDInfo.PortNumber));
+                mTCPKeepAlive.setText(String.valueOf(TCPUDInfo.TCPKeepAlive / 1000));
+                mSendTimeInterval.setText(String.valueOf(TCPUDInfo.SendTimeInterval / 1000));
+            }
+        });
+
+        TCPUDInfo.mHandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                switch (msg.what) {
+                    case 0xffff:
+                        mDeviceState.setText("服务器连接成功");
+                        break;
+                    case 0xfffe:
+                        mDeviceState.setText("服务器未开启/断网");
+                        break;
+                    case 0xfffd:
+                        mDeviceState.setText("正常收发数据");
+                        break;
+                    case 0xfffc:
+                        mDeviceState.setText("服务器断开稍后重试");
+                        break;
+                    default:
+                        super.handleMessage(msg);
+                        break;
+                }
+            }
+        };
+        /*mMyHandler.post(new Runnable() {
+            @Override
+            public void run() {
+            }
+        });*/
+
+        /*private static class MyHandler extends Handler{
 
         //弱引用
         WeakReference<paramFragment> mTarget;
@@ -248,39 +323,6 @@ public class paramFragment extends Fragment {
         }
     }*/
 
-    /**
-     * Fragment is active.
-     */
-    @Override
-    public void onResume() {
-        super.onResume();
-        TCPUDInfo.mHandler = new Handler(){
-            @Override
-            public void handleMessage(Message msg) {
-                switch (msg.what){
-                    case 0xffff:
-                        mDeviceState.setText("服务器连接成功");
-                        break;
-                    case 0xfffe:
-                        mDeviceState.setText("服务器未开启/断网");
-                        break;
-                    case 0xfffd:
-                        mDeviceState.setText("正常收发数据");
-                        break;
-                    case 0xfffc:
-                        mDeviceState.setText("服务器断开稍后重试");
-                        break;
-                    default:
-                        super.handleMessage(msg);
-                        break;
-                }
-            }
-        };
-        /*mMyHandler.post(new Runnable() {
-            @Override
-            public void run() {
-            }
-        });*/
-
     }
+
 }

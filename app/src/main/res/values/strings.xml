@@ -13,4 +13,5 @@
     <string name="air_environ">空气环境</string>
     <string name="soil_environ">土壤环境</string>
     <string name="irrigation_environ">灌溉环境</string>
+    <string name="tmp_value">%1$d ℃</string>
 </resources>
