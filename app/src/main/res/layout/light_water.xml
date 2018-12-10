@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="18dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    app:cardElevation="3dp"
+    app:cardCornerRadius="3dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/water_light_irri"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp">
+
+            <ImageView
+                android:id="@+id/light"
+                android:src="@drawable/light_off"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="56dp" />
+
+            <ImageView
+                android:id="@+id/curtain"
+                android:src="@drawable/curtain_off"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="56dp" />
+
+            <ImageView
+                android:id="@+id/irrigation"
+                android:src="@drawable/irrigation_off"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="56dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="14dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="补光灯"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="窗帘"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="灌溉阀门"
+                android:gravity="center"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="4dp">
+
+            <TextView
+                android:id="@+id/light_status"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/turn_off"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/curtain_status"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/turn_off"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/irrigation_status"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/turn_off"
+                android:gravity="center"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

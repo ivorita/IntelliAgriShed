@@ -1,30 +1,39 @@
 package com.antelope.android.intelliagrished;
 
-import android.app.Activity;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AlertDialog;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.antelope.android.intelliagrished.fragment.envFragment;
+import com.antelope.android.intelliagrished.fragment.noteFragment;
 import com.antelope.android.intelliagrished.fragment.paramFragment;
 import com.antelope.android.intelliagrished.fragment.remoteFragment;
 import com.antelope.android.intelliagrished.utils.ServerThread;
-import com.antelope.android.intelliagrished.utils.TCPUDInfo;
 import com.antelope.android.intelliagrished.utils.WriteCmdTask;
 
 import java.util.Timer;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity {
 
+    @BindView(R.id.nav_view)
+    NavigationView mNavView;
+    @BindView(R.id.drawer_layout)
+    DrawerLayout mDrawerLayout;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
     private boolean ExitState = false;
     private long ExitTime = 0;
 
@@ -48,6 +57,9 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 case R.id.navigation_params:
                     mViewPager.setCurrentItem(2);
+                    return true;
+                case R.id.navigation_note:
+                    mViewPager.setCurrentItem(3);
                     return true;
             }
             return false;
@@ -81,16 +93,43 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
         mViewPager = findViewById(R.id.viewPager);
         mViewPager.addOnPageChangeListener(mOnPageChangeListener);
         navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         setUpViewPager(mViewPager);
+        mNavView.setItemIconTintList(null);
+        setSupportActionBar(mToolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_action_name);
+        }
+
+        mNavView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                mDrawerLayout.closeDrawers();
+                return true;
+            }
+        });
 
         mServerThread.start();
 
         InitWriteCmdTimer();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                mDrawerLayout.openDrawer(GravityCompat.START);
+                break;
+            default:
+        }
+        return true;
     }
 
     private void setUpViewPager(ViewPager viewPager) {
@@ -98,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
         viewPagerAdapter.addFragment(envFragment.newInstance());
         viewPagerAdapter.addFragment(remoteFragment.newInstance());
         viewPagerAdapter.addFragment(paramFragment.newInstance());
+        viewPagerAdapter.addFragment(noteFragment.newInstance());
         viewPager.setAdapter(viewPagerAdapter);
     }
 

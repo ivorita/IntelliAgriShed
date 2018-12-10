@@ -39,10 +39,12 @@ public class envFragment extends Fragment {
 
     private static final String TAG = "envFragment";
 
-    @BindView(R.id.temp_value)
-    TextView mTempValue;
-    @BindView(R.id.humidity_value)
-    TextView mHumidityValue;
+    @BindView(R.id.city)
+    TextView mCity;
+    @BindView(R.id.air_temp_value)
+    TextView mAirTempValue;
+    @BindView(R.id.air_humidity_value)
+    TextView mAirHumidityValue;
     Unbinder unbinder;
     @BindView(R.id.forecast_layout)
     LinearLayout mForecastLayout;
@@ -52,8 +54,37 @@ public class envFragment extends Fragment {
     TextView mWeatherInfo;
     @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout mSwipeRefresh;
+    @BindView(R.id.illumination)
+    TextView mIllumination;
+    @BindView(R.id.co2)
+    TextView mCo2;
+    @BindView(R.id.soil_temp_value)
+    TextView mSoilTempValue;
+    @BindView(R.id.soil_humidity_value)
+    TextView mSoilHumidityValue;
+    @BindView(R.id.salt_solubility)
+    TextView mSaltSolubility;
+    @BindView(R.id.pH_value)
+    TextView mPHValue;
 
     private SharedPreferences sharedPreferences;
+
+    private int air_tmp;
+    private int air_humidity;
+    private int illumination_int;
+    private int co2;
+    private int soil_tmp;
+    private int soil_humidity;
+    private double salt;
+    private double ph;
+    private String temp_air;
+    private String humidity_air;
+    private String illumination_String;
+    private String co2_conc;
+    private String temp_soil;
+    private String humidity_soil;
+    private String salt_s;
+    private String pH_value;
 
     public static envFragment newInstance() {
         envFragment fragment = new envFragment();
@@ -79,6 +110,7 @@ public class envFragment extends Fragment {
         String updateTime = weather.basic.update.updateTime.split(" ")[1];
         String degree = weather.now.temperature;
         String weatherInfo = weather.now.info;
+        mCity.setText(cityName);
         mDegree.setText(degree);
         mWeatherInfo.setText(weatherInfo);
         mForecastLayout.removeAllViews();
@@ -107,7 +139,7 @@ public class envFragment extends Fragment {
         }
 
         //启动定时刷新天气服务
-        Intent intent = new Intent(getContext(),AutoUpdateService.class);
+        Intent intent = new Intent(getContext(), AutoUpdateService.class);
         getActivity().startService(intent);
 
     }
@@ -160,6 +192,15 @@ public class envFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
+        mAirTempValue.setText(temp_air);
+        mAirHumidityValue.setText(humidity_air);
+        mIllumination.setText(illumination_String);
+        mCo2.setText(co2_conc);
+        mSoilTempValue.setText(temp_soil);
+        mSoilHumidityValue.setText(humidity_soil);
+        mSaltSolubility.setText(salt_s);
+        mPHValue.setText(pH_value);
+
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
         String weatherString = prefs.getString("weather", null);
 
@@ -183,27 +224,32 @@ public class envFragment extends Fragment {
                         if (msg.arg1 > 100) {
                             msg.arg1 = 100;
                         }
-                        mTempValue.setText(Integer.toString(msg.arg1) + "℃"); // 空气环境：温度
+                        air_tmp = msg.arg1;
+                        mAirTempValue.setText(String.valueOf(msg.arg1) + "℃"); // 空气环境：温度
                         if (msg.arg2 > 100) {
                             msg.arg2 = 100;
                         }
-                        mHumidityValue.setText(Integer.toString(msg.arg2) + "%"); // 空气环境：湿度
+                        air_humidity = msg.arg2;
+                        mAirHumidityValue.setText(String.valueOf(msg.arg2) + "%"); // 空气环境：湿度
                         break;
-                    /*case 0x0011:
-                        Base_03.setText(Integer.toString(msg.arg1) + "Lux"); // 空气环境：光照
-                        Base_04.setText(Integer.toString(msg.arg2) + "ppm"); // 空气环境：二氧化碳
+                    case 0x0011:
+                        illumination_int = msg.arg1;
+                        co2 = msg.arg2;
+                        mIllumination.setText(String.valueOf(msg.arg1) + "Lux"); // 空气环境：光照
+                        mCo2.setText(String.valueOf(msg.arg2) + "ppm"); // 空气环境：二氧化碳
                         break;
                     case 0x0012:
-                        Base_05.setText(Integer.toString(msg.arg1) + "℃"); // 土壤环境：温度
-                        Base_06.setText(Integer.toString(msg.arg2) + "%"); // 土壤环境：湿度
+                        soil_tmp = msg.arg1;
+                        soil_humidity = msg.arg2;
+                        mSoilTempValue.setText(String.valueOf(msg.arg1) + "℃"); // 土壤环境：温度
+                        mSoilHumidityValue.setText(String.valueOf(msg.arg2) + "%"); // 土壤环境：湿度
                         break;
                     case 0x0013:
-                        Base_07.setText(Double.toString((double) msg.arg1 / 10) + "mS/cm"); // 土壤环境：盐溶解度
-                        Base_08.setText(Double.toString((double) msg.arg2 / 10)); // 土壤环境：PH值
+                        salt = (double)msg.arg1;
+                        ph = (double)msg.arg2;
+                        mSaltSolubility.setText(String.valueOf((double) msg.arg1 / 10) + "mS/cm"); // 土壤环境：盐溶解度
+                        mPHValue.setText(String.valueOf((double) msg.arg2 / 10)); // 土壤环境：PH值
                         break;
-                    case 0x0014:
-                        Base_09.setText(Integer.toString(msg.arg1) + "cm"); // 灌溉环境：水箱水位
-                        break;*/
                     default:
                         super.handleMessage(msg);
                         break;
@@ -226,22 +272,47 @@ public class envFragment extends Fragment {
         super.onPause();
         sharedPreferences = getActivity().getSharedPreferences("envParams", Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
+
         //空气温度
-        editor.putString("temp_air","");
+        temp_air = String.valueOf(air_tmp);
+        editor.putString("temp_air", temp_air);
+        Log.d(TAG, "onPause: " + "temp_air：" + temp_air);
+
         //空气湿度
-        editor.putString("humidity_air","");
+        humidity_air = String.valueOf(air_humidity);
+        editor.putString("humidity_air", humidity_air);
+        Log.d(TAG, "onPause: " + "humidity_air：" + humidity_air);
+
         //光照强度
-        editor.putString("illumination","");
+        illumination_String = String.valueOf(illumination_int);
+        editor.putString("illumination_String", illumination_String);
+        Log.d(TAG, "onPause: " + "illumination_String：" + illumination_String);
+
         //CO2浓度
-        editor.putString("CO2_concentration","");
+        co2_conc = String.valueOf(co2);
+        editor.putString("CO2_concentration", co2_conc);
+        Log.d(TAG, "onPause: " + "co2_conc：" + co2_conc);
+
         //土壤温度
-        editor.putString("temp_soil","");
+        temp_soil = String.valueOf(soil_tmp);
+        editor.putString("temp_soil", temp_soil);
+        Log.d(TAG, "onPause: " + "temp_soil：" + temp_soil);
+
         //土壤湿度
-        editor.putString("humidity_soil","");
+        humidity_soil = String.valueOf(soil_humidity);
+        editor.putString("humidity_soil", humidity_soil);
+        Log.d(TAG, "onPause: " + "humidity_soil：" + humidity_soil);
+
         //盐溶解度
-        editor.putString("salt_solubility","");
+        salt_s = String.valueOf(salt);
+        editor.putString("salt_solubility", salt_s);
+        Log.d(TAG, "onPause: " + "salt_s：" + salt_s);
+
         //pH值
-        editor.putString("pH_value","");
+        pH_value = String.valueOf(ph);
+        editor.putString("pH_value", pH_value);
+        Log.d(TAG, "onPause: " + "pH_value：" + pH_value);
+
         editor.apply();
     }
 

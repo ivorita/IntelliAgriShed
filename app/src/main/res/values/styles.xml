@@ -1,10 +1,10 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">#2196F3</item>
-        <item name="colorPrimaryDark">#2196F3</item>
+        <item name="colorPrimary">#4bcf51</item>
+        <item name="colorPrimaryDark">#4bcf51</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
@@ -14,6 +14,11 @@
         <item name="android:background">#F2F2F2</item>
         <item name="android:layout_marginStart">10dp</item>
         <item name="android:layout_marginEnd">10dp</item>
+    </style>
+
+    <style name="dialog_anim" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/dialog_anim_in</item>
+        <item name="android:windowExitAnimation">@anim/dialog_anim_exit</item>
     </style>
 
 </resources>

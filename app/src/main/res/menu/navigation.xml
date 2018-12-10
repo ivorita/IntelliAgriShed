@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/navigation_env"
-        android:icon="@drawable/env_det"
-        android:title="@string/title_env" />
+        android:icon="@drawable/env_det_icon"
+        android:title="@string/title_env"/>
 
     <item
         android:id="@+id/navigation_remote"
-        android:icon="@drawable/remote"
-        android:title="@string/title_remote" />
+        android:icon="@drawable/remote_icon"
+        android:title="@string/title_remote"/>
 
     <item
         android:id="@+id/navigation_params"
-        android:icon="@drawable/param"
-        android:title="@string/title_params" />
+        android:icon="@drawable/param_icon"
+        android:title="@string/title_params"/>
+
+    <item
+        android:id="@+id/navigation_note"
+        android:icon="@drawable/note"
+        android:title="备忘录" />
 
 </menu>

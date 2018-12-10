@@ -4,4 +4,8 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="edit_text_width_ip">38dp</dimen>
     <dimen name="edit_text_width_other">60dp</dimen>
+    <dimen name="card_margin">6dp</dimen>
+    <dimen name="card_margin_bottom">16dp</dimen>
+    <dimen name="title_margin_start">8dp</dimen>
+    <dimen name="title_margin_bottom">8dp</dimen>
 </resources>

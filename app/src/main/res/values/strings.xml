@@ -14,4 +14,21 @@
     <string name="soil_environ">土壤环境</string>
     <string name="irrigation_environ">灌溉环境</string>
     <string name="weather_tmp_value">%1$d ℃</string>
+    <string name="_3">未来3天天气预报</string>
+    <string name="soil_tmp">土壤温度</string>
+    <string name="soil_humidity">土壤湿度</string>
+    <string name="salt_s">盐溶解度</string>
+    <string name="ph">酸碱度</string>
+    <string name="percent">%</string>
+    <string name="cel">℃</string>
+    <string name="ms_cm">mS/cm</string>
+    <string name="air_tmp">空气温度</string>
+    <string name="air_humidity">空气湿度</string>
+    <string name="illu">光照强度</string>
+    <string name="co2">CO₂浓度</string>
+    <string name="lux">lux</string>
+    <string name="ppm">ppm</string>
+    <string name="water_light_irri"><![CDATA[遮阳/补光&灌溉系统]]></string>
+    <string name="turn_on">已开启</string>
+    <string name="turn_off">已关闭</string>
 </resources>

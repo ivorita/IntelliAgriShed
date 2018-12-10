@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -95,7 +96,7 @@ public class paramFragment extends Fragment {
 
     //修改保存对话框
     private void SaveDialog() {
-        SaveDialog = new AlertDialog.Builder(getContext()).setCancelable(false) // 屏幕外部区域点击无效
+        SaveDialog = new AlertDialog.Builder(getActivity()).setCancelable(false) // 屏幕外部区域点击无效
                 .setTitle("提示：").setMessage("确认要保存吗？").setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
@@ -151,6 +152,8 @@ public class paramFragment extends Fragment {
                         // 取消不需要任何代码
                     }
                 }).create();
+        Window window = SaveDialog.getWindow();
+        window.setWindowAnimations(R.style.dialog_anim);
     }
 
     //初始化参数设置

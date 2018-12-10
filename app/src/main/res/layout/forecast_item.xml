@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/title_margin_bottom"
+    android:layout_marginStart="22dp"
+    android:layout_marginEnd="22dp"
+    android:gravity="center_vertical">
+
+    <TextView
+        android:id="@+id/date_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:layout_weight="1.5"
+        tools:text="2018-12-4"
+        style="@style/Gray_item_Text_17"/>
+
+    <TextView
+        android:id="@+id/info_text"
+        style="@style/Gray_item_Text_17"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1.5"
+        android:gravity="center"
+        tools:text="晴" />
+
+    <TextView
+        android:id="@+id/min_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="0.6"
+        android:text="18℃"
+        android:gravity="center"
+        style="@style/Gray_item_Text_17"/>
+
+    <TextView
+        android:id="@+id/to"
+        android:layout_width="0dp"
+        android:layout_weight="0.3"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="~"
+        style="@style/Gray_item_Text_17"/>
+
+    <TextView
+        android:id="@+id/max_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="0.6"
+        android:text="20℃"
+        android:gravity="center"
+        style="@style/Gray_item_Text_17"/>
+
+</LinearLayout>

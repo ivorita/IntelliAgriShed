@@ -9,6 +9,12 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.RotateAnimation;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.antelope.android.intelliagrished.R;
 import com.antelope.android.intelliagrished.utils.TCPUDInfo;
@@ -16,10 +22,54 @@ import com.antelope.android.intelliagrished.utils.WriteCmdTask;
 
 import java.util.Timer;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 public class remoteFragment extends Fragment {
 
+    @BindView(R.id.light)
+    ImageView mLight;
+    @BindView(R.id.curtain)
+    ImageView mCurtain;
+    @BindView(R.id.irrigation)
+    ImageView mIrrigation;
+    @BindView(R.id.door_1)
+    ImageView mDoor1;
+    @BindView(R.id.door_2)
+    ImageView mDoor2;
+    @BindView(R.id.door_3)
+    ImageView mDoor3;
+    @BindView(R.id.fan)
+    ImageView mFan;
+    Unbinder unbinder;
+    @BindView(R.id.light_status)
+    TextView mLightStatus;
+    @BindView(R.id.curtain_status)
+    TextView mCurtainStatus;
+    @BindView(R.id.irrigation_status)
+    TextView mIrrigationStatus;
+    @BindView(R.id.door_1_status)
+    TextView mDoor1Status;
+    @BindView(R.id.door_2_status)
+    TextView mDoor2Status;
+    @BindView(R.id.door_3_status)
+    TextView mDoor3Status;
+    @BindView(R.id.fan_status)
+    TextView mFanStatus;
+    Unbinder unbinder1;
     private AlertDialog Dialog;
     private AlertDialog AffirmDialog;
+
+    private boolean isOn_1 = false;
+    private boolean isOn_2 = false;
+    private boolean isOn_3 = false;
+    private boolean isOn_4 = false;
+    private boolean isOn_5 = false;
+    private boolean isOn_6 = false;
+    private boolean isOn_7 = false;
+
+    private RotateAnimation mRotateAnimation;
 
     //默认不是按下的状态
     private int AffirmFlag = 0;
@@ -34,9 +84,125 @@ public class remoteFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_remote, container, false);
+        final ImageView mLight = view.findViewById(R.id.light);
+
+        final ImageView mCurtain = view.findViewById(R.id.curtain);
+        mCurtain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (view.getId() == R.id.curtain) {
+                    if (isOn_2) {
+                        mCurtain.setImageResource(R.drawable.curtain_off);
+                        mCurtainStatus.setText(R.string.turn_off);
+                    } else {
+                        mCurtain.setImageResource(R.drawable.curtain_on);
+                        mCurtainStatus.setText(R.string.turn_on);
+                    }
+                    isOn_2 = !isOn_2;
+                }
+
+            }
+        });
+
+        mLight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isOn_1) {
+                    mLight.setImageResource(R.drawable.light_off);
+                    mLightStatus.setText(R.string.turn_off);
+                } else {
+                    mLight.setImageResource(R.drawable.light_on);
+                    mLightStatus.setText(R.string.turn_on);
+                }
+                isOn_1 = !isOn_1;
+            }
+        });
+
+
+        final ImageView mIrrigation = view.findViewById(R.id.irrigation);
+        mIrrigation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isOn_3) {
+                    mIrrigation.setImageResource(R.drawable.irrigation_off);
+                    mIrrigationStatus.setText(R.string.turn_off);
+                } else {
+                    mIrrigation.setImageResource(R.drawable.irrigation_on);
+                    mIrrigationStatus.setText(R.string.turn_on);
+                }
+                isOn_3 = !isOn_3;
+            }
+        });
+
+        final ImageView mDoor1 = view.findViewById(R.id.door_1);
+        mDoor1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isOn_4) {
+                    mDoor1.setImageResource(R.drawable.door_close);
+                    mDoor1Status.setText(R.string.turn_off);
+                } else {
+                    mDoor1.setImageResource(R.drawable.door_open);
+                    mDoor1Status.setText(R.string.turn_on);
+                }
+                isOn_4 = !isOn_4;
+            }
+        });
+
+        final ImageView mDoor2 = view.findViewById(R.id.door_2);
+        mDoor2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isOn_5) {
+                    mDoor2.setImageResource(R.drawable.door_close);
+                    mDoor2Status.setText(R.string.turn_off);
+                } else {
+                    mDoor2.setImageResource(R.drawable.door_open);
+                    mDoor2Status.setText(R.string.turn_on);
+                }
+                isOn_5 = !isOn_5;
+            }
+        });
+
+        final ImageView mDoor3 = view.findViewById(R.id.door_3);
+        mDoor3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isOn_6) {
+                    mDoor3.setImageResource(R.drawable.door_close);
+                    mDoor3Status.setText(R.string.turn_off);
+                } else {
+                    mDoor3.setImageResource(R.drawable.door_open);
+                    mDoor3Status.setText(R.string.turn_on);
+                }
+                isOn_6 = !isOn_6;
+            }
+        });
+
+        final ImageView mFan = view.findViewById(R.id.fan);
+        mFan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isOn_7) {
+                    mFan.clearAnimation();
+                    mFan.setImageResource(R.drawable.fan_off);
+                    mFanStatus.setText(R.string.turn_off);
+                } else {
+                    Animation rotate = AnimationUtils.loadAnimation(getContext(), R.anim.fan_rotate);
+                    if (rotate != null) {
+                        mFan.setImageResource(R.drawable.fan_on);
+                        mFan.startAnimation(rotate);
+                    }
+                    mFanStatus.setText(R.string.turn_on);
+                }
+                isOn_7 = !isOn_7;
+            }
+        });
+
         InitDialog();
         InitAffirmDialog();
         InitWriteCmdTimer();
+        unbinder1 = ButterKnife.bind(this, view);
         return view;
     }
 
@@ -235,4 +401,10 @@ public class remoteFragment extends Fragment {
         super.onResume();
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder1.unbind();
+
+    }
 }
