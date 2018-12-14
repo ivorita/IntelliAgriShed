@@ -31,4 +31,7 @@
     <string name="water_light_irri"><![CDATA[遮阳/补光&灌溉系统]]></string>
     <string name="turn_on">已开启</string>
     <string name="turn_off">已关闭</string>
+    <string name="init_complete">软件初始化完毕</string>
+    <string name="network_server_offline">网络未开或服务器关</string>
+    <string name="tip">提示：</string>
 </resources>

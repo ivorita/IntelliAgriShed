@@ -1,5 +1,7 @@
 package com.antelope.android.intelliagrished;
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -10,8 +12,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.antelope.android.intelliagrished.fragment.envFragment;
@@ -25,8 +30,11 @@ import java.util.Timer;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final String TAG = "MainActivity";
 
     @BindView(R.id.nav_view)
     NavigationView mNavView;
@@ -34,8 +42,14 @@ public class MainActivity extends AppCompatActivity {
     DrawerLayout mDrawerLayout;
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
+    /*@BindView(R.id.about)
+    LinearLayout mAbout;
+    @BindView(R.id.history)
+    LinearLayout mHistory;*/
     private boolean ExitState = false;
     private long ExitTime = 0;
+
+    private Intent intent;
 
     private MenuItem mMenuItem;
     private BottomNavigationView navigation;
@@ -95,30 +109,56 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        //设置状态栏透明,实现抽屉沉浸式，另需在DrawerLayout布局设置 android:fitsSystemWindows="true"，还有灰层蒙版
+        setStatusBar();
+
         mViewPager = findViewById(R.id.viewPager);
         mViewPager.addOnPageChangeListener(mOnPageChangeListener);
         navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         setUpViewPager(mViewPager);
-        mNavView.setItemIconTintList(null);
+
         setSupportActionBar(mToolbar);
+
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeAsUpIndicator(R.drawable.ic_action_name);
         }
 
+        mNavView.setItemIconTintList(null);
         mNavView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                mDrawerLayout.closeDrawers();
+                switch (menuItem.getItemId()){
+                    case R.id.history:
+                        mDrawerLayout.closeDrawers();
+                        Toast.makeText(MainActivity.this,"历史记录",Toast.LENGTH_SHORT).show();
+                        intent = new Intent(MainActivity.this,ChartActivity.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.about:
+                        mDrawerLayout.closeDrawers();
+                        Toast.makeText(MainActivity.this,"关于app",Toast.LENGTH_SHORT).show();
+                        intent = new Intent(MainActivity.this,AboutActivity.class);
+                        startActivity(intent);
+                        break;
+                }
                 return true;
             }
         });
 
         mServerThread.start();
 
-        InitWriteCmdTimer();
+        //InitWriteCmdTimer();
+    }
+
+    /**
+     * 设置状态栏透明
+     */
+    private void setStatusBar() {
+        getWindow().setStatusBarColor(Color.TRANSPARENT);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
     }
 
     @Override
@@ -167,6 +207,21 @@ public class MainActivity extends AppCompatActivity {
     private void InitWriteCmdTimer() {
         Timer time = new Timer();
         time.schedule(new WriteCmdTask(), 1000, 2000);
+        Log.d(TAG, "InitWriteCmdTimer: " + "executed");
+        Toast.makeText(MainActivity.this,"MainActivity InitWriteCmdTimer",Toast.LENGTH_SHORT).show();
     }
 
+    /*@OnClick({R.id.about, R.id.history})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.about:
+                mDrawerLayout.closeDrawers();
+                Toast.makeText(MainActivity.this,"关于app",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.history:
+                mDrawerLayout.closeDrawers();
+                Toast.makeText(MainActivity.this,"历史记录",Toast.LENGTH_SHORT).show();
+                break;
+        }
+    }*/
 }

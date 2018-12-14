@@ -192,14 +192,14 @@ public class envFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        mAirTempValue.setText(temp_air);
+        /*mAirTempValue.setText(temp_air);
         mAirHumidityValue.setText(humidity_air);
         mIllumination.setText(illumination_String);
         mCo2.setText(co2_conc);
         mSoilTempValue.setText(temp_soil);
         mSoilHumidityValue.setText(humidity_soil);
         mSaltSolubility.setText(salt_s);
-        mPHValue.setText(pH_value);
+        mPHValue.setText(pH_value);*/
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
         String weatherString = prefs.getString("weather", null);
@@ -225,29 +225,31 @@ public class envFragment extends Fragment {
                             msg.arg1 = 100;
                         }
                         air_tmp = msg.arg1;
-                        mAirTempValue.setText(String.valueOf(msg.arg1) + "℃"); // 空气环境：温度
+                        mAirTempValue.setText(String.valueOf(msg.arg1)); // 空气环境：温度
+                        Log.d(TAG, "温度 " + String.valueOf(msg.arg1));
+                        Log.d(TAG, "温度更新");
                         if (msg.arg2 > 100) {
                             msg.arg2 = 100;
                         }
                         air_humidity = msg.arg2;
-                        mAirHumidityValue.setText(String.valueOf(msg.arg2) + "%"); // 空气环境：湿度
+                        mAirHumidityValue.setText(String.valueOf(msg.arg2)); // 空气环境：湿度
                         break;
                     case 0x0011:
                         illumination_int = msg.arg1;
                         co2 = msg.arg2;
-                        mIllumination.setText(String.valueOf(msg.arg1) + "Lux"); // 空气环境：光照
-                        mCo2.setText(String.valueOf(msg.arg2) + "ppm"); // 空气环境：二氧化碳
+                        mIllumination.setText(String.valueOf(msg.arg1)); // 空气环境：光照
+                        mCo2.setText(String.valueOf(msg.arg2)); // 空气环境：二氧化碳
                         break;
                     case 0x0012:
                         soil_tmp = msg.arg1;
                         soil_humidity = msg.arg2;
-                        mSoilTempValue.setText(String.valueOf(msg.arg1) + "℃"); // 土壤环境：温度
-                        mSoilHumidityValue.setText(String.valueOf(msg.arg2) + "%"); // 土壤环境：湿度
+                        mSoilTempValue.setText(String.valueOf(msg.arg1)); // 土壤环境：温度
+                        mSoilHumidityValue.setText(String.valueOf(msg.arg2)); // 土壤环境：湿度
                         break;
                     case 0x0013:
                         salt = (double)msg.arg1;
                         ph = (double)msg.arg2;
-                        mSaltSolubility.setText(String.valueOf((double) msg.arg1 / 10) + "mS/cm"); // 土壤环境：盐溶解度
+                        mSaltSolubility.setText(String.valueOf((double) msg.arg1 / 10)); // 土壤环境：盐溶解度
                         mPHValue.setText(String.valueOf((double) msg.arg2 / 10)); // 土壤环境：PH值
                         break;
                     default:

@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#f6f6f6">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,11 +18,46 @@
             android:layout_height="wrap_content"
             android:text="@string/network_state"
             android:background="@drawable/text_background"
-            android:layout_margin="10dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="16dp"
             android:paddingStart="5dp"
             style="@style/Black_Text_16"/>
 
-        <LinearLayout
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="6dp">
+
+            <ImageView
+                android:id="@+id/network_state_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/network_online"/>
+
+            <TextView
+                android:id="@+id/network_state_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/connect_state"
+                android:layout_toRightOf="@id/network_state_iv"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="6dp"/>
+
+            <TextView
+                android:id="@+id/deviceState"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="未连接"
+                android:layout_toRightOf="@id/network_state_iv"
+                android:layout_below="@id/network_state_tv"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="10dp"/>
+
+        </RelativeLayout>
+
+        <!--<LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -43,7 +79,7 @@
                 android:layout_marginBottom="10dp"
                 style="@style/Black_Text_16" />
 
-        </LinearLayout>
+        </LinearLayout>-->
 
     </LinearLayout>
 

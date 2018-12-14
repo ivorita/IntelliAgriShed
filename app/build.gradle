@@ -10,6 +10,11 @@ android {
         versionName "1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    packagingOptions {
+        exclude 'META-INF/proguard/androidx-annotations.pro'
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -36,4 +41,5 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:3.12.0'
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0-alpha'
 }

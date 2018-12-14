@@ -2,6 +2,7 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@android:color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardElevation="3dp"
@@ -118,7 +119,7 @@
                     android:id="@+id/soil_temp_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="25"
+                    tools:text="25"
                     style="@style/param_value_18"
                     android:layout_marginStart="10dp"/>
 
@@ -141,7 +142,7 @@
                     android:id="@+id/soil_humidity_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="75"
+                    tools:text="75"
                     style="@style/param_value_18"/>
 
                 <TextView
@@ -163,7 +164,7 @@
                     android:id="@+id/salt_solubility"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="9.8"
+                    tools:text="9.8"
                     style="@style/param_value_18"/>
 
                 <TextView
@@ -185,7 +186,7 @@
                     android:id="@+id/pH_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="7.6"
+                    tools:text="7.6"
                     style="@style/param_value_18"/>
 
             </LinearLayout>

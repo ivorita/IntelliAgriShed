@@ -76,9 +76,9 @@ public class paramFragment extends Fragment {
 
         // 判断设备网络连接状态
         if (!TCPUDInfo.DeviceState) {
-            mDeviceState.setText("网络未开或服务器关");
+            mDeviceState.setText(R.string.network_server_offline);
         } else {
-            mDeviceState.setText("软件初始化完毕");
+            mDeviceState.setText(R.string.init_complete);
         }
 
         SaveDialog();
@@ -91,13 +91,13 @@ public class paramFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        unbinder.unbind();
+        //unbinder.unbind();
     }
 
     //修改保存对话框
     private void SaveDialog() {
         SaveDialog = new AlertDialog.Builder(getActivity()).setCancelable(false) // 屏幕外部区域点击无效
-                .setTitle("提示：").setMessage("确认要保存吗？").setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.tip).setMessage("确认要保存吗？").setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
                         if (mIpAddress1.getText().toString().equals("") || mIpAddress2.getText().toString().equals("")
@@ -141,7 +141,8 @@ public class paramFragment extends Fragment {
                             if (!TCPUDInfo.DeviceState) {
                                 mDeviceState.setText("网络未开或服务器关");
                             } else {
-                                mServerThread.stopSocket();
+                                //mServerThread.stopSocket();
+                                Log.d(TAG, "关闭socket");
                                 mDeviceState.setText("立即断线重连");
                             }
                         }

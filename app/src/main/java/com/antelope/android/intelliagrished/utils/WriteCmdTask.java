@@ -1,7 +1,11 @@
 package com.antelope.android.intelliagrished.utils;
 
 import android.util.Log;
+import android.widget.Toast;
+
 import java.util.TimerTask;
+
+import static com.antelope.android.intelliagrished.utils.TCPUDInfo.mServerThread;
 
 public class WriteCmdTask extends TimerTask {
 
@@ -10,7 +14,7 @@ public class WriteCmdTask extends TimerTask {
     private int IndexValue = 0;
     private boolean ValidValue = false;
     private TCPUDInfo mTCPUDInfo = new TCPUDInfo();
-    private ServerThread mServerThread = new ServerThread();
+
 
     @Override
     public void run() {
@@ -30,97 +34,99 @@ public class WriteCmdTask extends TimerTask {
             // 判断当前索引值要进行什么操作
             switch (TCPUDInfo.WriteArray[IndexValue]) {
                 case 1:
-                    mServerThread.sendHexData(mTCPUDInfo.RelayOn1);
+                    mServerThread.sendHexData(TCPUDInfo.RelayOn1);
                     break;
                 case 16:
-                    mServerThread.sendHexData(mTCPUDInfo.RelayOff1);
+                    mServerThread.sendHexData(TCPUDInfo.RelayOff1);
                     break;
                 case 2:
-                    mServerThread.sendHexData(mTCPUDInfo.RelayOn2);
+                    mServerThread.sendHexData(TCPUDInfo.RelayOn2);
                     break;
                 case 17:
-                    mServerThread.sendHexData(mTCPUDInfo.RelayOff2);
+                    mServerThread.sendHexData(TCPUDInfo.RelayOff2);
                     break;
                 case 3:
-                    mServerThread.sendHexData(mTCPUDInfo.RelayOn3);
+                    mServerThread.sendHexData(TCPUDInfo.RelayOn3);
                     break;
                 case 18:
-                    mServerThread.sendHexData(mTCPUDInfo.RelayOff3);
+                    mServerThread.sendHexData(TCPUDInfo.RelayOff3);
                     break;
                 case 4:
-                    mServerThread.sendHexData(mTCPUDInfo.RelayOn4);
+                    mServerThread.sendHexData(TCPUDInfo.RelayOn4);
                     break;
                 case 19:
-                    mServerThread.sendHexData(mTCPUDInfo.RelayOff4);
+                    mServerThread.sendHexData(TCPUDInfo.RelayOff4);
                     break;
                 case 5:
-                    mServerThread.sendHexData(mTCPUDInfo.RelayOn5);
+                    mServerThread.sendHexData(TCPUDInfo.RelayOn5);
                     break;
                 case 20:
-                    mServerThread.sendHexData(mTCPUDInfo.RelayOff5);
+                    mServerThread.sendHexData(TCPUDInfo.RelayOff5);
                     break;
                 case 6:
-                    mServerThread.sendHexData(mTCPUDInfo.RelayOn6);
+                    mServerThread.sendHexData(TCPUDInfo.RelayOn6);
                     break;
                 case 21:
-                    mServerThread.sendHexData(mTCPUDInfo.RelayOff6);
+                    mServerThread.sendHexData(TCPUDInfo.RelayOff6);
                     break;
                 case 7:
-                    mServerThread.sendHexData(mTCPUDInfo.RelayOn7);
+                    mServerThread.sendHexData(TCPUDInfo.RelayOn7);
                     break;
                 case 22:
-                    mServerThread.sendHexData(mTCPUDInfo.RelayOff7);
+                    mServerThread.sendHexData(TCPUDInfo.RelayOff7);
                     break;
                 case 8:
-                    mServerThread.sendHexData(mTCPUDInfo.RelayOn8);
+                    mServerThread.sendHexData(TCPUDInfo.RelayOn8);
                     break;
                 case 23:
-                    mServerThread.sendHexData(mTCPUDInfo.RelayOff8);
+                    mServerThread.sendHexData(TCPUDInfo.RelayOff8);
                     break;
                 case 9:
-                    mServerThread.sendHexData(mTCPUDInfo.RelayOn9);
+                    mServerThread.sendHexData(TCPUDInfo.RelayOn9);
                     break;
                 case 24:
-                    mServerThread.sendHexData(mTCPUDInfo.RelayOff9);
+                    mServerThread.sendHexData(TCPUDInfo.RelayOff9);
                     break;
                 case 10:
-                    mServerThread.sendHexData(mTCPUDInfo.RelayOn10);
+                    mServerThread.sendHexData(TCPUDInfo.RelayOn10);
                     break;
                 case 25:
-                    mServerThread.sendHexData(mTCPUDInfo.RelayOff10);
+                    mServerThread.sendHexData(TCPUDInfo.RelayOff10);
                     break;
                 case 11:
-                    mServerThread.sendHexData(mTCPUDInfo.RelayOn11);
+                    mServerThread.sendHexData(TCPUDInfo.RelayOn11);
                     break;
                 case 26:
-                    mServerThread.sendHexData(mTCPUDInfo.RelayOff11);
+                    mServerThread.sendHexData(TCPUDInfo.RelayOff11);
                     break;
                 case 12:
-                    mServerThread.sendHexData(mTCPUDInfo.RelayOn12);
+                    mServerThread.sendHexData(TCPUDInfo.RelayOn12);
                     break;
                 case 27:
-                    mServerThread.sendHexData(mTCPUDInfo.RelayOff12);
+                    mServerThread.sendHexData(TCPUDInfo.RelayOff12);
                     break;
                 case 13:
-                    mServerThread.sendHexData(mTCPUDInfo.RelayOn13);
+                    mServerThread.sendHexData(TCPUDInfo.RelayOn13);
                     break;
                 case 28:
-                    mServerThread.sendHexData(mTCPUDInfo.RelayOff13);
+                    mServerThread.sendHexData(TCPUDInfo.RelayOff13);
                     break;
                 case 14:
-                    mServerThread.sendHexData(mTCPUDInfo.RelayOn14);
+                    mServerThread.sendHexData(TCPUDInfo.RelayOn14);
                     break;
                 case 29:
-                    mServerThread.sendHexData(mTCPUDInfo.RelayOff14);
+                    mServerThread.sendHexData(TCPUDInfo.RelayOff14);
                     break;
                 case 15:
-                    mServerThread.sendHexData(mTCPUDInfo.RelayOn15);
+                    mServerThread.sendHexData(TCPUDInfo.RelayOn15);
                     break;
                 case 30:
-                    mServerThread.sendHexData(mTCPUDInfo.RelayOff15);
+                    mServerThread.sendHexData(TCPUDInfo.RelayOff15);
                     break;
             }
             TCPUDInfo.WriteArray[IndexValue] = 0; // 触发完毕，当前的处理值清零
+        } else {
+            Log.i(TAG, "未发现有效值");
         }
     }
 }

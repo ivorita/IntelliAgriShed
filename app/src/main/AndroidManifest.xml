@@ -20,6 +20,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ChartActivity"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme_normal"
+            android:label="历史记录"/>
+        <activity android:name=".AboutActivity"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme_normal"
+            android:label="关于app"/>
+
         <service
             android:name=".utils.AutoUpdateService"
             android:enabled="true"

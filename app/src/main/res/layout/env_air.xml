@@ -2,6 +2,7 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@android:color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardElevation="3dp"
@@ -118,7 +119,7 @@
                     android:id="@+id/air_temp_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="20"
+                    tools:text="20"
                     style="@style/param_value_18" />
 
                 <TextView
@@ -140,7 +141,7 @@
                     android:id="@+id/air_humidity_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="68"
+                    tools:text="68"
                     style="@style/param_value_18"/>
 
                 <TextView
@@ -162,7 +163,7 @@
                     android:id="@+id/illumination"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="54"
+                    tools:text="54"
                     style="@style/param_value_18"/>
 
                 <TextView
@@ -184,7 +185,7 @@
                     android:id="@+id/co2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="36"
+                    tools:text="36"
                     android:layout_marginLeft="13dp"
                     style="@style/param_value_18"/>
 
