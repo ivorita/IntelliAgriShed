@@ -1,4 +1,4 @@
-package com.antelope.android.intelliagrished;
+package com.antelope.android.intelliagrished.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

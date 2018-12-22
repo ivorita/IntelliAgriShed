@@ -1,5 +1,6 @@
 package com.antelope.android.intelliagrished.adapter;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 
 import com.antelope.android.intelliagrished.R;
 import com.antelope.android.intelliagrished.db.Rec_item;
+import com.antelope.android.intelliagrished.note.activity.NoteActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +38,8 @@ public class RecAdapter extends RecyclerView.Adapter<RecAdapter.ViewHolder> {
                 int position = holder.getAdapterPosition();
                 Rec_item rec_item = mItemList.get(position);
                 Toast.makeText(view.getContext(), "你点击第" + (position + 1) + "项", Toast.LENGTH_SHORT).show();
+                //Intent intent = NoteActivity.newIntent(getClass(),.get(i).getId());
+                //startActivity(intent);
             }
         });
 

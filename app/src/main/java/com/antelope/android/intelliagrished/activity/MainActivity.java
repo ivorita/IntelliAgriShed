@@ -1,4 +1,4 @@
-package com.antelope.android.intelliagrished;
+package com.antelope.android.intelliagrished.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -16,9 +16,12 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.antelope.android.intelliagrished.R;
+import com.antelope.android.intelliagrished.adapter.viewPagerAdapter;
 import com.antelope.android.intelliagrished.fragment.envFragment;
 import com.antelope.android.intelliagrished.fragment.noteFragment;
 import com.antelope.android.intelliagrished.fragment.paramFragment;
@@ -123,24 +126,24 @@ public class MainActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setHomeAsUpIndicator(R.drawable.ic_action_name);
+            actionBar.setHomeAsUpIndicator(R.drawable.drawer_menu);
         }
 
         mNavView.setItemIconTintList(null);
         mNavView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                switch (menuItem.getItemId()){
+                switch (menuItem.getItemId()) {
                     case R.id.history:
                         mDrawerLayout.closeDrawers();
-                        Toast.makeText(MainActivity.this,"历史记录",Toast.LENGTH_SHORT).show();
-                        intent = new Intent(MainActivity.this,ChartActivity.class);
+                        Toast.makeText(MainActivity.this, "历史记录", Toast.LENGTH_SHORT).show();
+                        intent = new Intent(MainActivity.this, ChartActivity.class);
                         startActivity(intent);
                         break;
                     case R.id.about:
                         mDrawerLayout.closeDrawers();
-                        Toast.makeText(MainActivity.this,"关于app",Toast.LENGTH_SHORT).show();
-                        intent = new Intent(MainActivity.this,AboutActivity.class);
+                        Toast.makeText(MainActivity.this, "关于app", Toast.LENGTH_SHORT).show();
+                        intent = new Intent(MainActivity.this, AboutActivity.class);
                         startActivity(intent);
                         break;
                 }
@@ -148,9 +151,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        setHeaderValue();
+
         mServerThread.start();
 
         //InitWriteCmdTimer();
+    }
+
+    //设置抽屉用户名
+    private void setHeaderValue() {
+        intent = getIntent();
+        String name = intent.getStringExtra("name");
+        TextView userName = mNavView.getHeaderView(0).findViewById(R.id.nav_header_root).findViewById(R.id.user_name);
+        userName.setText(name);
     }
 
     /**
@@ -208,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
         Timer time = new Timer();
         time.schedule(new WriteCmdTask(), 1000, 2000);
         Log.d(TAG, "InitWriteCmdTimer: " + "executed");
-        Toast.makeText(MainActivity.this,"MainActivity InitWriteCmdTimer",Toast.LENGTH_SHORT).show();
+        Toast.makeText(MainActivity.this, "MainActivity InitWriteCmdTimer", Toast.LENGTH_SHORT).show();
     }
 
     /*@OnClick({R.id.about, R.id.history})

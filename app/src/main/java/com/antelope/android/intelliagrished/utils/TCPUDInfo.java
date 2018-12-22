@@ -30,6 +30,8 @@ public class TCPUDInfo {
 
     public static Handler mHandler;
 
+    public static Handler mHandler1;
+
     // 发送队列,每次定时器会检索发送队列里的数据，如果非零（则取1-15，用来操作1号到15号继电器）数量暂定20
     public static int[] WriteArray = new int[20];
 
@@ -265,139 +267,141 @@ public class TCPUDInfo {
         if ((ReceiveBuffer[27] * 256 + ReceiveBuffer[28]) > 0) {
             Message msg = new Message();
             msg.what = 0x0001;
-            mHandler.sendMessage(msg);
+            mHandler1.sendMessage(msg);
         } else {
             Message msg = new Message();
             msg.what = 0x1001;
-            mHandler.sendMessage(msg);
+            mHandler1.sendMessage(msg);
         }
         if ((ReceiveBuffer[29] * 256 + ReceiveBuffer[30]) > 0) {
             Message msg = new Message();
             msg.what = 0x0002;
-            mHandler.sendMessage(msg);
+            mHandler1.sendMessage(msg);
         } else {
             Message msg = new Message();
             msg.what = 0x1002;
-            mHandler.sendMessage(msg);
+            mHandler1.sendMessage(msg);
         }
         if ((ReceiveBuffer[31] * 256 + ReceiveBuffer[32]) > 0) {
             Message msg = new Message();
             msg.what = 0x0003;
-            mHandler.sendMessage(msg);
+            mHandler1.sendMessage(msg);
         } else {
             Message msg = new Message();
             msg.what = 0x1003;
-            mHandler.sendMessage(msg);
+            mHandler1.sendMessage(msg);
         }
         if ((ReceiveBuffer[33] * 256 + ReceiveBuffer[34]) > 0) {
             Message msg = new Message();
             msg.what = 0x0004;
-            mHandler.sendMessage(msg);
+            mHandler1.sendMessage(msg);
         } else {
             Message msg = new Message();
             msg.what = 0x1004;
-            mHandler.sendMessage(msg);
+            mHandler1.sendMessage(msg);
         }
         if ((ReceiveBuffer[35] * 256 + ReceiveBuffer[36]) > 0) {
             Message msg = new Message();
             msg.what = 0x0005;
             msg.arg1=5;
-            mHandler.sendMessage(msg);
+            mHandler1.sendMessage(msg);
             Log.d("TCPUDInfo", "handleMessage: 顶窗开启");
         } else {
             Message msg = new Message();
             msg.what = 0x01005;
-            mHandler.sendMessage(msg);
+            mHandler1.sendMessage(msg);
         }
         if ((ReceiveBuffer[37] * 256 + ReceiveBuffer[38]) > 0) {
             Message msg = new Message();
             msg.what = 0x0006;
-            mHandler.sendMessage(msg);
+            mHandler1.sendMessage(msg);
         } else {
             Message msg = new Message();
             msg.what = 0x1006;
-            mHandler.sendMessage(msg);
+            mHandler1.sendMessage(msg);
         }
         if ((ReceiveBuffer[39] * 256 + ReceiveBuffer[40]) > 0) {
             Message msg = new Message();
             msg.what = 0x0007;
-            mHandler.sendMessage(msg);
+            mHandler1.sendMessage(msg);
         } else {
             Message msg = new Message();
             msg.what = 0x1007;
-            mHandler.sendMessage(msg);
+            mHandler1.sendMessage(msg);
         }
         if ((ReceiveBuffer[41] * 256 + ReceiveBuffer[42]) > 0) {
             Message msg = new Message();
             msg.what = 0x0008;
-            mHandler.sendMessage(msg);
+            mHandler1.sendMessage(msg);
         } else {
             Message msg = new Message();
             msg.what = 0x1008;
-            mHandler.sendMessage(msg);
+            mHandler1.sendMessage(msg);
         }
         if ((ReceiveBuffer[43] * 256 + ReceiveBuffer[44]) > 0) {
+            Log.d("TCPUDInfo", "ReceiveBuffer: " + ReceiveBuffer[43] * 256 + ReceiveBuffer[44] );
             Message msg = new Message();
             msg.what = 0x0009;
-            mHandler.sendMessage(msg);
+            Log.d("TCPUDInfo", "msg.what9: "+ msg.what);
+            mHandler1.sendMessage(msg);
         } else {
             Message msg = new Message();
             msg.what = 0x1009;
-            mHandler.sendMessage(msg);
+            mHandler1.sendMessage(msg);
         }
         if ((ReceiveBuffer[45] * 256 + ReceiveBuffer[46]) > 0) {
             Message msg = new Message();
             msg.what = 0x0000a;
-            mHandler.sendMessage(msg);
+            mHandler1.sendMessage(msg);
         } else {
             Message msg = new Message();
             msg.what = 0x100a;
-            mHandler.sendMessage(msg);
+            mHandler1.sendMessage(msg);
         }
         if ((ReceiveBuffer[47] * 256 + ReceiveBuffer[48]) > 0) {
             Message msg = new Message();
             msg.what = 0x000b;
-            mHandler.sendMessage(msg);
+            mHandler1.sendMessage(msg);
         } else {
             Message msg = new Message();
             msg.what = 0x100b;
-            mHandler.sendMessage(msg);
+            mHandler1.sendMessage(msg);
         }
         if ((ReceiveBuffer[49] * 256 + ReceiveBuffer[50]) > 0) {
             Message msg = new Message();
             msg.what = 0x000c;
-            mHandler.sendMessage(msg);
+            mHandler1.sendMessage(msg);
         } else {
             Message msg = new Message();
             msg.what = 0x100c;
-            mHandler.sendMessage(msg);
+            mHandler1.sendMessage(msg);
         }
         if ((ReceiveBuffer[51] * 256 + ReceiveBuffer[52]) > 0) {
             Message msg = new Message();
             msg.what = 0x000d;
-            mHandler.sendMessage(msg);
+            mHandler1.sendMessage(msg);
         } else {
             Message msg = new Message();
             msg.what = 0x100d;
-            mHandler.sendMessage(msg);
+            mHandler1.sendMessage(msg);
         }
         if ((ReceiveBuffer[53] * 256 + ReceiveBuffer[54]) > 0) {
             Message msg = new Message();
             msg.what = 0x000e;
-            mHandler.sendMessage(msg);
+            mHandler1.sendMessage(msg);
         } else {
             Message msg = new Message();
             msg.what = 0x100e;
-            mHandler.sendMessage(msg);
+            mHandler1.sendMessage(msg);
         }
         if ((ReceiveBuffer[55] * 256 + ReceiveBuffer[56]) > 0) {
             Message msg = new Message();
             msg.what = 0x000f;
-            mHandler.sendMessage(msg);
+            mHandler1.sendMessage(msg);
         } else {
             Message msg = new Message();
             msg.what = 0x100f;
-            mHandler.sendMessage(msg);
+            mHandler1.sendMessage(msg);
         }
     }
 

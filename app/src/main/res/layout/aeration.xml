@@ -39,6 +39,13 @@
                 android:layout_weight="1"
                 android:src="@drawable/door_close" />
 
+            <ImageView
+                android:id="@+id/door_3"
+                android:layout_width="0dp"
+                android:layout_height="76dp"
+                android:layout_weight="1"
+                android:src="@drawable/door_close" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -60,6 +67,13 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="2号顶窗" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="3号顶窗" />
 
         </LinearLayout>
 
@@ -86,6 +100,14 @@
                 android:gravity="center"
                 tools:text="@string/turn_off" />
 
+            <TextView
+                android:id="@+id/door_3_status"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                tools:text="@string/turn_off" />
+
         </LinearLayout>
 
         <View style="@style/setting_divider_style" />
@@ -97,11 +119,18 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/door_3"
+                android:id="@+id/warm_air_1"
                 android:layout_width="0dp"
                 android:layout_height="76dp"
                 android:layout_weight="1"
-                android:src="@drawable/door_close" />
+                android:src="@drawable/warm_air_off" />
+
+            <ImageView
+                android:id="@+id/warm_air_2"
+                android:layout_width="0dp"
+                android:layout_height="76dp"
+                android:layout_weight="1"
+                android:src="@drawable/warm_air_off" />
 
             <ImageView
                 android:id="@+id/fan"
@@ -134,7 +163,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="3号顶窗" />
+                android:text="1号暖风机" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="2号暖风机" />
 
             <TextView
                 android:layout_width="0dp"
@@ -153,12 +189,21 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/door_3_status"
+                android:id="@+id/warm_status_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
                 tools:text="@string/turn_off" />
+
+            <TextView
+                android:id="@+id/warm_status_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                tools:text="@string/turn_off" />
+
 
             <TextView
                 android:id="@+id/fan_status"

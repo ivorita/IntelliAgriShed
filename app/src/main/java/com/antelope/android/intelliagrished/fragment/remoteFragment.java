@@ -18,7 +18,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.antelope.android.intelliagrished.MainActivity;
 import com.antelope.android.intelliagrished.R;
 import com.antelope.android.intelliagrished.utils.TCPUDInfo;
 import com.antelope.android.intelliagrished.utils.WriteCmdTask;
@@ -50,7 +49,6 @@ public class remoteFragment extends Fragment {
     ImageView mDoor3;
     @BindView(R.id.fan)
     ImageView mFan;
-    Unbinder unbinder;
     @BindView(R.id.light_status)
     TextView mLightStatus;
     @BindView(R.id.curtain_status)
@@ -66,19 +64,16 @@ public class remoteFragment extends Fragment {
     @BindView(R.id.fan_status)
     TextView mFanStatus;
     Unbinder unbinder1;
+    @BindView(R.id.warm_air_1)
+    ImageView mWarmAir1;
+    @BindView(R.id.warm_air_2)
+    ImageView mWarmAir2;
+    @BindView(R.id.warm_status_1)
+    TextView mWarmStatus1;
+    @BindView(R.id.warm_status_2)
+    TextView mWarmStatus2;
     private AlertDialog Dialog;
     private AlertDialog AffirmDialog;
-
-    /*private boolean isOn_1 = false;
-    private boolean isOn_2 = false;
-    private boolean isOn_3 = false;
-    private boolean isOn_4 = false;
-    private boolean isOn_5 = false;
-    private boolean isOn_6 = false;
-    private boolean isOn_7 = false;*/
-
-    //默认不是按下的状态
-    //private int AffirmFlag = 0;
 
     public static remoteFragment newInstance() {
         remoteFragment fragment = new remoteFragment();
@@ -92,6 +87,7 @@ public class remoteFragment extends Fragment {
 
         InitDialog();
         InitAffirmDialog();
+        InitWriteCmdTimer();
         unbinder1 = ButterKnife.bind(this, view);
         return view;
     }
@@ -284,7 +280,7 @@ public class remoteFragment extends Fragment {
         Timer time = new Timer();
         time.schedule(new WriteCmdTask(), 1000, 2000);
         Log.d(TAG, "InitWriteCmdTimer " + "executed");
-        Toast.makeText(getContext(),"InitWriteCmdTimer executed",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "InitWriteCmdTimer executed", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -292,16 +288,13 @@ public class remoteFragment extends Fragment {
 
         super.onResume();
 
-        InitWriteCmdTimer();
-
-        TCPUDInfo.mHandler = new Handler() {
+        TCPUDInfo.mHandler1 = new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 // 如果该消息是本程序所发送的
                 switch (msg.what) {
 
                     case 0x0004: // 继电器4 1号侧帘 的消息句柄
-                        //Relay4_State.setImageResource(R.drawable.open);
                         mCurtain.setImageResource(R.drawable.curtain_on);
                         mCurtainStatus.setText(R.string.turn_on);
                         if (TCPUDInfo.firstInitButtonName[3] == false) {
@@ -310,7 +303,6 @@ public class remoteFragment extends Fragment {
                         }
                         break;
                     case 0x1004: // 继电器4 1号侧帘 关闭的消息句柄
-                        //Relay4_State.setImageResource(R.drawable.close);
                         mCurtain.setImageResource(R.drawable.curtain_off);
                         mCurtainStatus.setText(R.string.turn_off);
                         if (TCPUDInfo.firstInitButtonName[3] == false) {
@@ -319,7 +311,6 @@ public class remoteFragment extends Fragment {
                         }
                         break;
                     case 0x0005: // 继电器5 1号顶窗 开启的消息句柄
-                        //Relay5_State.setImageResource(R.drawable.open);
                         Log.d(TAG, "handleMessage: 顶窗开启");
                         Log.d(TAG, "handleMessage: " + msg.arg1);
                         mDoor1.setImageResource(R.drawable.door_open);
@@ -330,7 +321,6 @@ public class remoteFragment extends Fragment {
                         }
                         break;
                     case 0x1005: // 继电器5 1号顶窗 关闭的消息句柄
-                        //Relay5_State.setImageResource(R.drawable.close);
                         mDoor1.setImageResource(R.drawable.door_close);
                         mDoor1Status.setText(R.string.turn_off);
                         if (TCPUDInfo.firstInitButtonName[4] == false) {
@@ -339,7 +329,6 @@ public class remoteFragment extends Fragment {
                         }
                         break;
                     case 0x0006: // 继电器6 2号顶窗 开启的消息句柄
-                        //Relay6_State.setImageResource(R.drawable.open);
                         mDoor2.setImageResource(R.drawable.door_open);
                         mDoor2Status.setText(R.string.turn_on);
                         if (TCPUDInfo.firstInitButtonName[5] == false) {
@@ -348,7 +337,6 @@ public class remoteFragment extends Fragment {
                         }
                         break;
                     case 0x1006: // 继电器6 2号顶窗 关闭的消息句柄
-                        //Relay6_State.setImageResource(R.drawable.close);
                         mDoor2.setImageResource(R.drawable.door_close);
                         mDoor2Status.setText(R.string.turn_off);
                         if (TCPUDInfo.firstInitButtonName[5] == false) {
@@ -357,7 +345,6 @@ public class remoteFragment extends Fragment {
                         }
                         break;
                     case 0x0007: // 继电器7 1号侧窗 开启的消息句柄
-                        //Relay7_State.setImageResource(R.drawable.open);
                         mDoor3.setImageResource(R.drawable.door_open);
                         mDoor3Status.setText(R.string.turn_on);
                         if (TCPUDInfo.firstInitButtonName[6] == false) {
@@ -366,7 +353,6 @@ public class remoteFragment extends Fragment {
                         }
                         break;
                     case 0x1007: // 继电器7 1号侧窗 关闭的消息句柄
-                        //Relay7_State.setImageResource(R.drawable.close);
                         mDoor3.setImageResource(R.drawable.door_close);
                         mDoor3Status.setText(R.string.turn_off);
                         if (TCPUDInfo.firstInitButtonName[6] == false) {
@@ -375,7 +361,6 @@ public class remoteFragment extends Fragment {
                         }
                         break;
                     case 0x0008: // 继电器8 通风机 开启的消息句柄
-                        //Relay8_State.setImageResource(R.drawable.open);
                         Animation rotate = AnimationUtils.loadAnimation(getContext(), R.anim.fan_rotate);
                         if (rotate != null) {
                             mFan.setImageResource(R.drawable.fan_on);
@@ -388,7 +373,6 @@ public class remoteFragment extends Fragment {
                         }
                         break;
                     case 0x1008: // 继电器8 通风机 关闭的消息句柄
-                        //Relay8_State.setImageResource(R.drawable.close);
                         mFan.clearAnimation();
                         mFan.setImageResource(R.drawable.fan_off);
                         mFanStatus.setText(R.string.turn_off);
@@ -398,7 +382,7 @@ public class remoteFragment extends Fragment {
                         }
                         break;
                     case 0x0009: // 继电器9 补光灯 打开的消息句柄
-                        //Relay9_State.setImageResource(R.drawable.open);
+                        Log.d(TAG, "handleMessage: 9");
                         mLight.setImageResource(R.drawable.light_on);
                         mLightStatus.setText(R.string.turn_on);
                         if (TCPUDInfo.firstInitButtonName[8] == false) {
@@ -407,7 +391,6 @@ public class remoteFragment extends Fragment {
                         }
                         break;
                     case 0x1009: // 继电器9 补光灯 关闭的消息句柄
-                        //Relay9_State.setImageResource(R.drawable.close);
                         mLight.setImageResource(R.drawable.light_off);
                         mLightStatus.setText(R.string.turn_off);
                         if (TCPUDInfo.firstInitButtonName[8] == false) {
@@ -416,63 +399,72 @@ public class remoteFragment extends Fragment {
                         }
                         break;
                     case 0x000a: // 继电器10关闭的消息句柄
-                        //Relay10_State.setImageResource(R.drawable.open);
                         if (TCPUDInfo.firstInitButtonName[9] == false) {
                             TCPUDInfo.firstInitButtonName[9] = true;
                             TCPUDInfo.DigitalOutput[9] = true;
                         }
                         break;
                     case 0x100a: // 继电器10关闭的消息句柄
-                        //Relay10_State.setImageResource(R.drawable.close);
                         if (TCPUDInfo.firstInitButtonName[9] == false) {
                             TCPUDInfo.firstInitButtonName[9] = true;
                             TCPUDInfo.DigitalOutput[9] = false;
                         }
                         break;
                     case 0x000c: // 继电器12 1号暖风机 开启的消息句柄
-                        //Relay12_State.setImageResource(R.drawable.open);
+                        Animation rotate_w1 = AnimationUtils.loadAnimation(getContext(), R.anim.fan_rotate);
+                        if (rotate_w1 != null) {
+                            mWarmAir1.setImageResource(R.drawable.warm_air_on);
+                            mWarmAir1.startAnimation(rotate_w1);
+                        }
+                        mWarmStatus1.setText(R.string.turn_on);
                         if (TCPUDInfo.firstInitButtonName[11] == false) {
                             TCPUDInfo.firstInitButtonName[11] = true;
                             TCPUDInfo.DigitalOutput[11] = true;
                         }
                         break;
                     case 0x100c: // 继电器12 1号暖风机 关闭的消息句柄
-                        //Relay12_State.setImageResource(R.drawable.close);
+                        mWarmAir1.clearAnimation();
+                        mWarmAir1.setImageResource(R.drawable.warm_air_off);
+                        mWarmStatus1.setText(R.string.turn_off);
                         if (TCPUDInfo.firstInitButtonName[11] == false) {
                             TCPUDInfo.firstInitButtonName[11] = true;
                             TCPUDInfo.DigitalOutput[11] = false;
                         }
                         break;
                     case 0x000d: // 继电器13 2号暖风机 开启的消息句柄
-                        //Relay13_State.setImageResource(R.drawable.open);
+                        Animation rotate_w2 = AnimationUtils.loadAnimation(getContext(), R.anim.fan_rotate);
+                        if (rotate_w2 != null) {
+                            mWarmAir2.setImageResource(R.drawable.warm_air);
+                            mWarmAir2.startAnimation(rotate_w2);
+                        }
+                        mWarmStatus2.setText(R.string.turn_on);
                         if (TCPUDInfo.firstInitButtonName[12] == false) {
                             TCPUDInfo.firstInitButtonName[12] = true;
                             TCPUDInfo.DigitalOutput[12] = true;
                         }
                         break;
                     case 0x100d: // 继电器13 2号暖风机 关闭的消息句柄
-                        //Relay13_State.setImageResource(R.drawable.close);
+                        mWarmAir2.clearAnimation();
+                        mWarmAir2.setImageResource(R.drawable.warm_air);
+                        mWarmStatus2.setText(R.string.turn_off);
                         if (TCPUDInfo.firstInitButtonName[12] == false) {
                             TCPUDInfo.firstInitButtonName[12] = true;
                             TCPUDInfo.DigitalOutput[12] = false;
                         }
                         break;
                     case 0x000e: // 继电器14 喷雾器 开启的消息句柄
-                        //Relay14_State.setImageResource(R.drawable.open);
                         if (TCPUDInfo.firstInitButtonName[13] == false) {
                             TCPUDInfo.firstInitButtonName[13] = true;
                             TCPUDInfo.DigitalOutput[13] = true;
                         }
                         break;
                     case 0x100e: // 继电器14 喷雾器 关闭的消息句柄
-                        //Relay14_State.setImageResource(R.drawable.close);
                         if (TCPUDInfo.firstInitButtonName[13] == false) {
                             TCPUDInfo.firstInitButtonName[13] = true;
                             TCPUDInfo.DigitalOutput[13] = false;
                         }
                         break;
                     case 0x000f: // 继电器15 灌溉阀门 开启的消息句柄
-                        //Relay15_State.setImageResource(R.drawable.open);
                         mIrrigation.setImageResource(R.drawable.irrigation_on);
                         mIrrigationStatus.setText(R.string.turn_on);
                         if (TCPUDInfo.firstInitButtonName[14] == false) {
@@ -481,7 +473,6 @@ public class remoteFragment extends Fragment {
                         }
                         break;
                     case 0x100f: // 继电器15 灌溉阀门 关闭的消息句柄
-                        //Relay15_State.setImageResource(R.drawable.close);
                         mIrrigation.setImageResource(R.drawable.irrigation_off);
                         mIrrigationStatus.setText(R.string.turn_off);
                         if (TCPUDInfo.firstInitButtonName[14] == false) {
@@ -491,12 +482,11 @@ public class remoteFragment extends Fragment {
                         break;
                     default:
                         super.handleMessage(msg);
-                        Log.d(TAG, "handleMessage: null" );
+                        Log.d(TAG, "handleMessage: null");
                         break;
                 }
             }
 
-            ;
         };
 
     }
@@ -507,30 +497,23 @@ public class remoteFragment extends Fragment {
         unbinder1.unbind();
     }
 
-    @OnClick({R.id.light, R.id.curtain, R.id.irrigation, R.id.door_1, R.id.door_2, R.id.door_3, R.id.fan})
+    @OnClick({R.id.light, R.id.curtain, R.id.irrigation, R.id.door_1, R.id.door_2, R.id.door_3, R.id.warm_air_1,R.id.warm_air_2,R.id.fan})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.light:
                 if (TCPUDInfo.DeviceState) {
-                    //mLightStatus.setText(R.string.turn_off);
                     AffirmFlag = 9; // 指示：现在点击的是第一个按钮
                     AffirmDialog.show();
                 } else {
-                    /*mLight.setImageResource(R.drawable.light_on);
-                    mLightStatus.setText(R.string.turn_on);*/
                     AffirmFlag = 0; // 无效的情况下，不做任何操作
                     Dialog.show();
                 }
                 break;
             case R.id.curtain:
                 if (TCPUDInfo.DeviceState) {
-                    /*mCurtain.setImageResource(R.drawable.curtain_off);
-                    mCurtainStatus.setText(R.string.turn_off);*/
                     AffirmFlag = 4; // 指示：现在点击的是第一个按钮
                     AffirmDialog.show();
                 } else {
-                    /*mCurtain.setImageResource(R.drawable.curtain_on);
-                    mCurtainStatus.setText(R.string.turn_on);*/
                     AffirmFlag = 0; // 无效的情况下，不做任何操作
                     Dialog.show();
                 }
@@ -538,13 +521,9 @@ public class remoteFragment extends Fragment {
                 break;
             case R.id.irrigation:
                 if (TCPUDInfo.DeviceState) {
-                   /* mIrrigation.setImageResource(R.drawable.irrigation_off);
-                    mIrrigationStatus.setText(R.string.turn_off);*/
                     AffirmFlag = 15; // 指示：现在点击的是第一个按钮
                     AffirmDialog.show();
                 } else {
-                    /*mIrrigation.setImageResource(R.drawable.irrigation_on);
-                    mIrrigationStatus.setText(R.string.turn_on);*/
                     AffirmFlag = 0; // 无效的情况下，不做任何操作
                     Dialog.show();
                 }
@@ -552,13 +531,9 @@ public class remoteFragment extends Fragment {
                 break;
             case R.id.door_1:
                 if (TCPUDInfo.DeviceState) {
-                    /*mDoor1.setImageResource(R.drawable.door_close);
-                    mDoor1Status.setText(R.string.turn_off);*/
                     AffirmFlag = 5; // 指示：现在点击的是第一个按钮
                     AffirmDialog.show();
                 } else {
-                    /*mDoor1.setImageResource(R.drawable.door_open);
-                    mDoor1Status.setText(R.string.turn_on);*/
                     AffirmFlag = 0; // 无效的情况下，不做任何操作
                     Dialog.show();
                 }
@@ -566,50 +541,48 @@ public class remoteFragment extends Fragment {
                 break;
             case R.id.door_2:
                 if (TCPUDInfo.DeviceState) {
-                    /*mDoor2.setImageResource(R.drawable.door_close);
-                    mDoor2Status.setText(R.string.turn_off);*/
                     AffirmFlag = 6; // 指示：现在点击的是第一个按钮
                     AffirmDialog.show();
                 } else if (TCPUDInfo.DeviceState) {
-                   /* mDoor2.setImageResource(R.drawable.door_open);
-                    mDoor2Status.setText(R.string.turn_on);*/
                     AffirmFlag = 0; // 无效的情况下，不做任何操作
                     Dialog.show();
                 }
-                //isOn_5 = !isOn_5;
                 break;
             case R.id.door_3:
                 if (TCPUDInfo.DeviceState) {
-                    /*mDoor3.setImageResource(R.drawable.door_close);
-                    mDoor3Status.setText(R.string.turn_off);*/
                     AffirmFlag = 7; // 指示：现在点击的是第一个按钮
                     AffirmDialog.show();
                 } else {
-                    /*mDoor3.setImageResource(R.drawable.door_open);
-                    mDoor3Status.setText(R.string.turn_on);*/
                     AffirmFlag = 0; // 无效的情况下，不做任何操作
                     Dialog.show();
                 }
-                //isOn_6 = !isOn_6;
+                break;
+            case R.id.warm_air_1:
+                if (TCPUDInfo.DeviceState) {
+                    AffirmFlag = 12; // 指示：现在点击的是第一个按钮
+                    AffirmDialog.show();
+                } else {
+                    AffirmFlag = 0; // 无效的情况下，不做任何操作
+                    Dialog.show();
+                }
+                break;
+            case R.id.warm_air_2:
+                if (TCPUDInfo.DeviceState) {
+                    AffirmFlag = 13; // 指示：现在点击的是第一个按钮
+                    AffirmDialog.show();
+                } else {
+                    AffirmFlag = 0; // 无效的情况下，不做任何操作
+                    Dialog.show();
+                }
                 break;
             case R.id.fan:
                 if (TCPUDInfo.DeviceState) {
-                    /*mFan.clearAnimation();
-                    mFan.setImageResource(R.drawable.fan_off);
-                    mFanStatus.setText(R.string.turn_off);*/
                     AffirmFlag = 8; // 指示：现在点击的是第一个按钮
                     AffirmDialog.show();
                 } else {
-                    /*Animation rotate = AnimationUtils.loadAnimation(getContext(), R.anim.fan_rotate);
-                    if (rotate != null) {
-                        mFan.setImageResource(R.drawable.fan_on);
-                        mFan.startAnimation(rotate);
-                    }
-                    mFanStatus.setText(R.string.turn_on);*/
                     AffirmFlag = 0; // 无效的情况下，不做任何操作
                     Dialog.show();
                 }
-                //isOn_7 = !isOn_7;
                 break;
         }
     }

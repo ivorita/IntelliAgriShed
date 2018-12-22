@@ -192,14 +192,14 @@ public class envFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        /*mAirTempValue.setText(temp_air);
+        mAirTempValue.setText(temp_air);
         mAirHumidityValue.setText(humidity_air);
         mIllumination.setText(illumination_String);
         mCo2.setText(co2_conc);
         mSoilTempValue.setText(temp_soil);
         mSoilHumidityValue.setText(humidity_soil);
         mSaltSolubility.setText(salt_s);
-        mPHValue.setText(pH_value);*/
+        mPHValue.setText(pH_value);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
         String weatherString = prefs.getString("weather", null);
@@ -219,6 +219,7 @@ public class envFragment extends Fragment {
         TCPUDInfo.mHandler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
+                Log.d(TAG, "handleMessage: " + msg.what);
                 switch (msg.what) {
                     case 0x0010:
                         if (msg.arg1 > 100) {
@@ -306,12 +307,12 @@ public class envFragment extends Fragment {
         Log.d(TAG, "onPause: " + "humidity_soil：" + humidity_soil);
 
         //盐溶解度
-        salt_s = String.valueOf(salt);
+        salt_s = String.valueOf(salt/10);
         editor.putString("salt_solubility", salt_s);
         Log.d(TAG, "onPause: " + "salt_s：" + salt_s);
 
         //pH值
-        pH_value = String.valueOf(ph);
+        pH_value = String.valueOf(ph/10);
         editor.putString("pH_value", pH_value);
         Log.d(TAG, "onPause: " + "pH_value：" + pH_value);
 

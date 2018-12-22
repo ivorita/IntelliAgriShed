@@ -1,4 +1,13 @@
 <resources>
+
+    <string name="username">用户名</string>
+    <string name="password">密码</string>
+    <string name="login">登录</string>
+    <string name="remember">记住密码</string>
+    <string name="forget">忘记密码</string>
+    <string name="mail">邮箱</string>
+    <string name="text1">账号或密码不能为空</string>
+
     <string name="app_name">智能农业</string>
     <string name="title_env">环境监测</string>
     <string name="title_remote">远程控制</string>
@@ -34,4 +43,5 @@
     <string name="init_complete">软件初始化完毕</string>
     <string name="network_server_offline">网络未开或服务器关</string>
     <string name="tip">提示：</string>
+    <string name="register">注册</string>
 </resources>

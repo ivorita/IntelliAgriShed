@@ -1,8 +1,9 @@
-package com.antelope.android.intelliagrished;
+package com.antelope.android.intelliagrished.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.antelope.android.intelliagrished.R;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Description;
@@ -22,7 +23,6 @@ public class ChartActivity extends AppCompatActivity {
 
     @BindView(R.id.line)
     LineChart mLine;
-    private LineChart mLineChart;
     private String[] titles = {"一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"};
 
     @Override
@@ -30,12 +30,13 @@ public class ChartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.history_chart);
         ButterKnife.bind(this);
-        //mLineChart = findViewById(R.id.line);
+
         mLine.setDrawBorders(true);
         List<Entry> entries = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
             entries.add(new Entry(i, (float) Math.random() * 80));
         }
+
         LineDataSet lineDataSet = new LineDataSet(entries, "温度");
         LineData lineData = new LineData(lineDataSet);
         mLine.setData(lineData);
