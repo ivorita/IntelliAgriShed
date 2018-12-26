@@ -19,7 +19,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/soil_environ"
-            android:background="@drawable/text_background"
             android:layout_marginStart="@dimen/title_margin_start"
             android:layout_marginTop="8dp"
             android:paddingStart="5dp"

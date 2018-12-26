@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="108dp"
+        android:background="@drawable/back_white_radius"
+        android:orientation="vertical">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="88dp">
+
+            <TextView
+                android:id="@+id/login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="118dp"
+                android:text="@string/login"
+                android:textColor="#4caf50"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="42dp"
+                android:text="@string/register"
+                android:textColor="#4caf50"
+                android:textSize="20sp" />
+        </TableRow>
+
+        <EditText
+            android:id="@+id/username"
+            android:layout_width="264dp"
+            android:layout_height="34dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="55dp"
+            android:background="@drawable/radius"
+            android:drawableStart="@mipmap/user"
+            android:elevation="5dp"
+            android:hint="@string/username"
+            android:paddingStart="10dp"
+            android:singleLine="true"
+            android:textColor="@color/hint"
+            android:textCursorDrawable="@null" />
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="264dp"
+            android:layout_height="34dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="26dp"
+            android:background="@drawable/radius"
+            android:drawableStart="@mipmap/password"
+            android:elevation="5dp"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:paddingStart="10dp"
+            android:singleLine="true"
+            android:textColor="@color/hint"
+            android:textCursorDrawable="@null" />
+
+        <EditText
+            android:id="@+id/mail"
+            android:layout_width="264dp"
+            android:layout_height="34dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="26dp"
+            android:background="@drawable/radius"
+            android:drawableStart="@mipmap/mail"
+            android:elevation="5dp"
+            android:hint="@string/mail"
+            android:inputType="textEmailAddress"
+            android:paddingStart="10dp"
+            android:singleLine="true"
+            android:textColor="@color/hint"
+            android:textCursorDrawable="@null" />
+
+        <Button
+            android:id="@+id/register_btn"
+            android:layout_width="264dp"
+            android:layout_height="34dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/gradient"
+            android:elevation="5dp"
+            android:text="注&#8195;册"
+            android:textColor="#ffff"
+            android:textSize="25sp" />
+
+    </LinearLayout>
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginTop="40dp"-->
+        <!--android:gravity="center"-->
+        <!--android:elevation="5dp"-->
+        <!--android:orientation="vertical">-->
+
+        <!--<ImageView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:src="@mipmap/desk_icon"/>-->
+
+    <!--</LinearLayout>-->
+
+</RelativeLayout>

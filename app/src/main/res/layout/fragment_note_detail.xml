@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@android:color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white">
+
+        <EditText
+            android:id="@+id/note_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/title_note"
+            android:inputType="text"
+            android:textSize="18sp"
+            android:background="@null"
+            android:textColorHint="#bdbdbd"
+            android:paddingStart="16dp"
+            android:paddingTop="14dp"
+            android:paddingBottom="8dp"/>
+
+    </LinearLayout>
+
+    <View style="@style/setting_divider_style_note" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white">
+
+        <TextView
+            android:id="@+id/timer_select"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="点击选择时间"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"/>
+
+    </LinearLayout>
+
+    <View style="@style/setting_divider_style_note" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/note_content"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:hint="@string/note"
+            android:gravity="start"
+            android:background="@null"
+            android:textColorHint="#bdbdbd"
+            android:textSize="18sp"
+            android:paddingStart="16dp"
+            android:paddingTop="14dp"
+            android:paddingBottom="8dp"
+            android:paddingEnd="16dp"
+            android:inputType="textMultiLine"/>
+
+    </LinearLayout>
+
+    <View style="@style/setting_divider_style_note" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="照片"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:paddingStart="16dp"
+            android:paddingTop="14dp"
+            android:paddingBottom="8dp"
+            android:paddingEnd="16dp"/>
+
+        <ImageView
+            android:id="@+id/iv_note"
+            android:src="@drawable/d"
+            android:layout_width="300dp"
+            android:layout_height="200dp"
+            android:scaleType="center"
+            android:cropToPadding="true" />
+
+    </LinearLayout>
+
+</LinearLayout>

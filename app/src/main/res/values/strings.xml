@@ -44,4 +44,15 @@
     <string name="network_server_offline">网络未开或服务器关</string>
     <string name="tip">提示：</string>
     <string name="register">注册</string>
+    <string name="title_note">点击输入标题</string>
+    <string name="note">备注</string>
+
+    <string name="cancel">取消</string>
+    <string name="time_select">请选择时间</string>
+    <string name="commit">确定</string>
+    <string name="year">年</string>
+    <string name="month">月</string>
+    <string name="day">日</string>
+    <string name="hour">时</string>
+    <string name="minute">分</string>
 </resources>

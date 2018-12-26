@@ -29,6 +29,11 @@
         <item name="android:textSize">24sp</item>
     </style>
 
+    <style name="White_Text_18">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
     <style name="Gray_item_Text_17">
         <item name="android:textColor">#757575</item>
         <item name="android:textSize">17sp</item>

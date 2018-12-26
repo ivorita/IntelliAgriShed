@@ -12,7 +12,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="215dp"
-        android:background="@drawable/bgp2" />
+        android:background="@drawable/bgp1" />
 
     <LinearLayout
         android:layout_width="match_parent"

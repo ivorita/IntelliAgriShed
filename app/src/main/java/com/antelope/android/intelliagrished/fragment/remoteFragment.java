@@ -280,7 +280,7 @@ public class remoteFragment extends Fragment {
         Timer time = new Timer();
         time.schedule(new WriteCmdTask(), 1000, 2000);
         Log.d(TAG, "InitWriteCmdTimer " + "executed");
-        Toast.makeText(getContext(), "InitWriteCmdTimer executed", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(), "InitWriteCmdTimer executed", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -434,7 +434,7 @@ public class remoteFragment extends Fragment {
                     case 0x000d: // 继电器13 2号暖风机 开启的消息句柄
                         Animation rotate_w2 = AnimationUtils.loadAnimation(getContext(), R.anim.fan_rotate);
                         if (rotate_w2 != null) {
-                            mWarmAir2.setImageResource(R.drawable.warm_air);
+                            mWarmAir2.setImageResource(R.drawable.warm_air_on);
                             mWarmAir2.startAnimation(rotate_w2);
                         }
                         mWarmStatus2.setText(R.string.turn_on);
@@ -494,7 +494,7 @@ public class remoteFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        unbinder1.unbind();
+        //unbinder1.unbind();
     }
 
     @OnClick({R.id.light, R.id.curtain, R.id.irrigation, R.id.door_1, R.id.door_2, R.id.door_3, R.id.warm_air_1,R.id.warm_air_2,R.id.fan})

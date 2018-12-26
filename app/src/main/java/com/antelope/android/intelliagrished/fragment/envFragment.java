@@ -27,6 +27,8 @@ import com.antelope.android.intelliagrished.utils.TCPUDInfo;
 import com.antelope.android.intelliagrished.utils.Utility;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -85,6 +87,10 @@ public class envFragment extends Fragment {
     private String humidity_soil;
     private String salt_s;
     private String pH_value;
+
+    public static int env_values;
+
+    //public static List<Integer> env_values = new ArrayList<>();
 
     public static envFragment newInstance() {
         envFragment fragment = new envFragment();
@@ -234,6 +240,8 @@ public class envFragment extends Fragment {
                         }
                         air_humidity = msg.arg2;
                         mAirHumidityValue.setText(String.valueOf(msg.arg2)); // 空气环境：湿度
+                        //env_values.add(msg.arg1);
+                        //env_values = msg.arg1;
                         break;
                     case 0x0011:
                         illumination_int = msg.arg1;

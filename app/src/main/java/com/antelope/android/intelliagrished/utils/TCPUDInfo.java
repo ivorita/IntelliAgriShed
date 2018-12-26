@@ -13,6 +13,8 @@ import java.io.OutputStream;
  */
 public class TCPUDInfo {
 
+    public static int env_values;
+
     //IP
     public static String IpAddress;
 
@@ -195,6 +197,8 @@ public class TCPUDInfo {
         }
         //土壤环境：温度
         BaseInfo3.arg1 = (ReceiveBuffer[17] + Temp) * 256 + ReceiveBuffer[18] + Temp1;
+
+        env_values = (ReceiveBuffer[17] + Temp) * 256 + ReceiveBuffer[18] + Temp1;
 
         if (ReceiveBuffer[19] < 0) {
             Temp = 256;

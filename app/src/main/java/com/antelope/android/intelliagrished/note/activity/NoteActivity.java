@@ -1,0 +1,49 @@
+package com.antelope.android.intelliagrished.note.activity;
+
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.view.Menu;
+import android.view.MenuItem;
+
+import com.antelope.android.intelliagrished.R;
+import com.antelope.android.intelliagrished.note.fragment.noteDetailFragment;
+
+import java.util.UUID;
+
+public class NoteActivity extends SingleFragmentActivity {
+
+    private static final String EXTRA_NOTE_ID = "com.antelope.android.intelliagrished.note_id";
+
+    public static Intent newIntent(Context packageContext, UUID id) {
+        Intent intent = new Intent(packageContext, NoteActivity.class);
+        intent.putExtra(EXTRA_NOTE_ID, id);
+        return intent;
+    }
+
+    @Override
+    protected Fragment createFragment() {
+        UUID id = (UUID) getIntent().getSerializableExtra(EXTRA_NOTE_ID);
+        return noteDetailFragment.newInstance(id);
+    }
+
+
+    /*@Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_fragment);
+
+        FragmentManager fm = getSupportFragmentManager();
+        Fragment fragment = fm.findFragmentById(R.id.fragment_contain);
+
+        if (fragment == null){
+            fragment = new StudentFragment();
+            fm.beginTransaction()
+                    .add(R.id.fragment_contain,fragment)
+                    .commit();
+        }
+    }*/
+
+}

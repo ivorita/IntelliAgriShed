@@ -24,9 +24,17 @@
         <item name="android:layout_marginEnd">10dp</item>
     </style>
 
+    <style name="setting_divider_style_note">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.75dp</item>
+        <item name="android:background">#F2F2F2</item>
+    </style>
+
     <style name="dialog_anim" parent="android:Animation">
         <item name="android:windowEnterAnimation">@anim/dialog_anim_in</item>
         <item name="android:windowExitAnimation">@anim/dialog_anim_exit</item>
     </style>
+
+
 
 </resources>
