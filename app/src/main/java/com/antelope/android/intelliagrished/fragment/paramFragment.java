@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +34,8 @@ public class paramFragment extends Fragment {
     private static final String TAG = "paramFragment";
 
     String[] IPSplit = new String[4];
+    @BindView(R.id.network_state_iv)
+    ImageView mNetworkStateIv;
 
     private AlertDialog SaveDialog;
 
@@ -77,8 +80,10 @@ public class paramFragment extends Fragment {
         // 判断设备网络连接状态
         if (!TCPUDInfo.DeviceState) {
             mDeviceState.setText(R.string.network_server_offline);
+            mNetworkStateIv.setImageResource(R.drawable.internet_disconnect);
         } else {
             mDeviceState.setText(R.string.init_complete);
+            mNetworkStateIv.setImageResource(R.drawable.internet_connect);
         }
 
         SaveDialog();
@@ -274,15 +279,23 @@ public class paramFragment extends Fragment {
                 switch (msg.what) {
                     case 0xffff:
                         mDeviceState.setText("服务器连接成功");
+                        mNetworkStateIv.setImageResource(R.drawable.internet_connect);
+                        Log.d(TAG, "handleMessage: 服务器连接成功");
                         break;
                     case 0xfffe:
                         mDeviceState.setText("服务器未开启/断网");
+                        mNetworkStateIv.setImageResource(R.drawable.internet_disconnect);
+                        Log.d(TAG, "handleMessage: 服务器未开启");
                         break;
                     case 0xfffd:
                         mDeviceState.setText("正常收发数据");
+                        mNetworkStateIv.setImageResource(R.drawable.internet_connect);
+                        Log.d(TAG, "handleMessage: 正常收发数据");
                         break;
                     case 0xfffc:
                         mDeviceState.setText("服务器断开稍后重试");
+                        mNetworkStateIv.setImageResource(R.drawable.internet_disconnect);
+                        Log.d(TAG, "handleMessage: 服务器断开稍后重试");
                         break;
                     default:
                         super.handleMessage(msg);
@@ -303,27 +316,6 @@ public class paramFragment extends Fragment {
 
         public MyHandler(paramFragment fragment) {
             mTarget = new WeakReference<paramFragment>(fragment);
-        }
-
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what){
-                case 0xffff:
-                    mDeviceState.setText("服务器连接成功");
-                    break;
-                case 0xfffe:
-                    mDeviceState.setText("服务器未开启/断网");
-                    break;
-                case 0xfffd:
-                    mDeviceState.setText("正常收发数据");
-                    break;
-                case 0xfffc:
-                    mDeviceState.setText("服务器断开稍后重试");
-                    break;
-                default:
-                    super.handleMessage(msg);
-                    break;
-            }
         }
     }*/
 

@@ -72,26 +72,18 @@ public class NoteLab {
         } finally {
             cursorWrapper.close();
         }
-        /*for (Student student : mStudents){
-            if (student.getId().equals(id)){
-                return student;
-            }
-        }
-        return null;*/
     }
 
     //添加数据
     public void addNote(NoteBean mNoteBean) {
         ContentValues values = getContentValues(mNoteBean);
         mDatabase.insert(NoteDbSchema.NoteTable.NAME, null, values);
-        //mStudents.add(student);
     }
 
     //删除数据
     public void removeNote(NoteBean noteBean) {
         String uuidString = noteBean.getId().toString();
         mDatabase.delete(NoteDbSchema.NoteTable.NAME, NoteDbSchema.NoteTable.Cols.UUID + "=?", new String[]{uuidString});
-        //mStudents.remove(student);
     }
 
     public File getPhotoFile(NoteBean noteBean) {

@@ -56,11 +56,6 @@ public class noteDetailFragment extends Fragment {
     @BindView(R.id.timer_select)
     TextView mTimerSelect;
 
-    /*@BindView(R.id.age)
-    TextInputEditText mTitle;
-    @BindView(R.id.aca)
-    TextInputEditText mContent;*/
-
     private EditText mTitle;
     private EditText mContent;
 
@@ -105,7 +100,6 @@ public class noteDetailFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_note_detail, container, false);
-        //ButterKnife.bind(this, v);
 
         mTitle = v.findViewById(R.id.note_title);
         mContent = v.findViewById(R.id.note_content);

@@ -93,7 +93,6 @@
 
         <ImageView
             android:id="@+id/iv_note"
-            android:src="@drawable/d"
             android:layout_width="300dp"
             android:layout_height="200dp"
             android:scaleType="center"

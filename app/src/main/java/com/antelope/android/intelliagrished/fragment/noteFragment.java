@@ -1,6 +1,5 @@
 package com.antelope.android.intelliagrished.fragment;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -20,17 +19,14 @@ import com.antelope.android.intelliagrished.R;
 import com.antelope.android.intelliagrished.adapter.RecAdapter;
 import com.antelope.android.intelliagrished.db.Rec_item;
 import com.antelope.android.intelliagrished.note.activity.NotePagerActivity;
-import com.antelope.android.intelliagrished.note.fragment.noteDetailFragment;
 import com.antelope.android.intelliagrished.note.util.ItemTouchHelperAdapter;
 import com.antelope.android.intelliagrished.note.util.NoteBean;
 import com.antelope.android.intelliagrished.note.util.NoteLab;
-import com.antelope.android.intelliagrished.note.util.OnDeleteNoteListener;
 import com.antelope.android.intelliagrished.note.util.SimpleItemTouchHelperCallback;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.UUID;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -57,8 +53,6 @@ public class noteFragment extends Fragment {
 
     private int position;
 
-    private OnDeleteNoteListener mDeleteCalLBack;
-
     public static noteFragment newInstance() {
         noteFragment fragment = new noteFragment();
         return fragment;
@@ -71,15 +65,6 @@ public class noteFragment extends Fragment {
         mRecView = view.findViewById(R.id.rec_view);
 
         mRecView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-//        for (int i = 0; i < 20; i++) {
-//            Rec_item item = new Rec_item("00:36", "2018年12月12日", "test");
-//            mItemList.add(item);
-//        }
-//
-//        RecAdapter recAdapter = new RecAdapter(mItemList);
-//
-//        mRecView.setAdapter(recAdapter);
 
         unbinder = ButterKnife.bind(this, view);
 
@@ -96,16 +81,12 @@ public class noteFragment extends Fragment {
         NoteLab noteLab = NoteLab.get(getActivity());
         List<NoteBean> notes = noteLab.getNotes();
 
-//        mNoteAdapter = new NoteAdapter(notes);
-//        mRecView.setAdapter(mNoteAdapter);
-
         if (mNoteAdapter == null) {
             mNoteAdapter = new NoteAdapter(notes);
             mRecView.setAdapter(mNoteAdapter);
         } else {
             mNoteAdapter.setNoteBeans(notes);
             mNoteAdapter.notifyDataSetChanged();
-            //mNoteAdapter.notifyItemChanged(position);//此方法通过一个外部的方法控制如果适配器的内容改变时需要强制调用getView来刷新每个Item的内容,可以实现动态的刷新列表的功能，单例更新
         }
 
     }
@@ -126,7 +107,6 @@ public class noteFragment extends Fragment {
         private TextView mTitleTextView;
         private TextView mTimeTextView;
         private TextView mDateTextView;
-        //        private TextView mContentTextView;
         private NoteBean mNoteBean;
 
         //每次绑定前，首先实例化相关组件，由于这是一次性事件，因此直接放在构造方法里处理
@@ -137,11 +117,10 @@ public class noteFragment extends Fragment {
             mTitleTextView = itemView.findViewById(R.id.list_item_title);
             mTimeTextView = itemView.findViewById(R.id.item_time);
             mDateTextView = itemView.findViewById(R.id.item_date);
-//            mContentTextView = itemView.findViewById(R.id.note_content);
         }
 
 
-        //每次有新的Crime要在CrimeHolder中显示时，都要调用它一次
+        //每次有新的note要在CrimeHolder中显示时，都要调用它一次
         public void bind(NoteBean noteBean) {
             mNoteBean = noteBean;
             mTitleTextView.setText(mNoteBean.getTitle());
@@ -159,8 +138,6 @@ public class noteFragment extends Fragment {
         //列表项视图都关联着ViewHolder，就可以让ViewHolder为它监听用户触摸事件。
         @Override
         public void onClick(View view) {
-            //Toast.makeText(getActivity(),mCrime.getTitle() + " Clicked",Toast.LENGTH_SHORT).show();
-            //Intent intent = new Intent(getActivity(),CrimeActivity.class);
             position = mRecView.getChildAdapterPosition(view);//通过点击事件获取当前位置
             Intent intent = NotePagerActivity.newIntent(getActivity(), mNoteBean.getId());
             startActivity(intent);
@@ -175,7 +152,6 @@ public class noteFragment extends Fragment {
 
         public NoteAdapter(List<NoteBean> noteBeans) {
             mNoteBeans = noteBeans;
-            Log.d("noteFragment", String.valueOf(mNoteBeans.size()));
         }
 
         @NonNull
@@ -221,22 +197,11 @@ public class noteFragment extends Fragment {
         public void onItemDismiss(int position) {
             //移除数据
 
-            //UUID crimeId = (UUID)getArguments().getSerializable(ARG_NOTE_ID);
-            //mNoteBean = NoteLab.get(getActivity()).getNote(crimeId);
-//            NoteLab.get(getActivity()).removeNote(mNoteBeans.get(position));
-//            NoteLab n1 = NoteLab.get(getActivity());
-            //n1.removeNote(mNoteAdapter.mNoteBeans.get(mHolder.getAdapterPosition()));
-
             Log.d("noteFragment", "onItemDismiss: id");
 
             NoteBean noteBean1 = mNoteBeans.get(position);
 
             Log.d("noteFragment", "position: " + position);
-
-            //Log.d("noteFragment", "onSwiped: " + noteBean.getId());
-//            if (noteBean.getId() != null) {
-//                mDeleteCalLBack.onNoteIdSelected(noteBean.getId());
-//            }
 
             NoteBean noteBean = NoteLab.get(getActivity()).getNote(noteBean1.getId());
             NoteLab.get(getActivity()).removeNote(noteBean);

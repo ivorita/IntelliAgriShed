@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:background="@android:color/white"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardElevation="3dp"
-    app:cardCornerRadius="3dp"
     android:layout_marginStart="@dimen/card_margin"
     android:layout_marginEnd="@dimen/card_margin"
-    android:layout_marginBottom="@dimen/card_margin_bottom">
+    android:layout_marginBottom="@dimen/card_margin_bottom"
+    android:background="@android:color/white"
+    app:cardCornerRadius="3dp"
+    app:cardElevation="3dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,87 +17,87 @@
         android:orientation="vertical">
 
         <TextView
+            style="@style/Gray_Text_18"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/air_environ"
             android:layout_marginStart="@dimen/title_margin_start"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
             android:paddingStart="5dp"
-            style="@style/Gray_Text_18"/>
+            android:text="@string/air_environ" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <ImageView
-                android:src="@drawable/air_tmp"
                 android:layout_width="0dp"
+                android:layout_height="46dp"
                 android:layout_weight="1"
-                android:layout_height="46dp"/>
+                android:src="@drawable/air_tmp" />
 
             <ImageView
-                android:src="@drawable/air_hum"
                 android:layout_width="0dp"
+                android:layout_height="46dp"
                 android:layout_weight="1"
-                android:layout_height="46dp"/>
+                android:src="@drawable/air_hum" />
 
             <ImageView
-                android:src="@drawable/illu"
                 android:layout_width="0dp"
+                android:layout_height="46dp"
                 android:layout_weight="1"
-                android:layout_height="46dp"/>
+                android:src="@drawable/illu" />
 
             <ImageView
-                android:src="@drawable/co2"
                 android:layout_width="0dp"
+                android:layout_height="46dp"
                 android:layout_weight="1"
-                android:layout_height="46dp"/>
+                android:src="@drawable/co2" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="14dp"
-            android:layout_marginTop="10dp">
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
                 android:text="@string/air_tmp"
-                android:textSize="18sp"
                 android:textColor="#4289ff"
-                android:gravity="center"/>
+                android:textSize="18sp" />
 
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
                 android:text="@string/air_humidity"
-                android:textSize="18sp"
                 android:textColor="#198df9"
-                android:gravity="center"/>
+                android:textSize="18sp" />
 
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
                 android:text="@string/illu"
-                android:textSize="18sp"
                 android:textColor="#ff8a01"
-                android:gravity="center"/>
+                android:textSize="18sp" />
 
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
                 android:text="@string/co2"
-                android:textSize="18sp"
                 android:textColor="#00bcde"
-                android:gravity="center"/>
+                android:textSize="18sp" />
 
         </LinearLayout>
 
@@ -108,91 +108,91 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_weight="1"
                 android:gravity="center_horizontal"
-                android:orientation="horizontal"
-                android:layout_marginBottom="16dp">
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/air_temp_value"
+                    style="@style/param_value_18"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="20"
-                    style="@style/param_value_18" />
+                    tools:text="20" />
 
                 <TextView
+                    style="@style/unit_12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/cel"
-                    style="@style/unit_12"/>
+                    android:text="@string/cel" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:gravity="center_horizontal"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/air_humidity_value"
+                    style="@style/param_value_18"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="68"
-                    style="@style/param_value_18"/>
+                    tools:text="68" />
 
                 <TextView
+                    style="@style/unit_12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/percent"
-                    style="@style/unit_12"/>
+                    android:text="@string/percent" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_horizontal">
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/illumination"
+                    style="@style/param_value_18"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="54"
-                    style="@style/param_value_18"/>
+                    tools:text="54" />
 
                 <TextView
+                    style="@style/unit_12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/lux"
-                    style="@style/unit_12"/>
+                    android:text="@string/lux" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_horizontal">
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/co2"
+                    style="@style/param_value_18"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="36"
                     android:layout_marginLeft="13dp"
-                    style="@style/param_value_18"/>
+                    tools:text="36" />
 
                 <TextView
+                    style="@style/unit_12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/ppm"
-                    style="@style/unit_12"/>
+                    android:text="@string/ppm" />
 
             </LinearLayout>
 
@@ -200,4 +200,4 @@
 
     </LinearLayout>
 
-</android.support.v7.widget.CardView>
+</android.support.design.card.MaterialCardView>

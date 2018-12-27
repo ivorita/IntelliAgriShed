@@ -34,10 +34,7 @@
         <item name="android:textSize">18sp</item>
     </style>
 
-    <style name="Gray_item_Text_17">
-        <item name="android:textColor">#757575</item>
-        <item name="android:textSize">17sp</item>
-    </style>
+
 
     <style name="Gray_Text_18">
         <item name="android:textColor">#bdbdbd</item>
@@ -54,6 +51,11 @@
         <item name="android:textSize">18sp</item>
     </style>
 
+    <style name="Gray_item_Text_17">
+        <item name="android:textColor">#757575</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
     <style name="param_name">
         <item name="android:textSize">17sp</item>
     </style>
@@ -61,6 +63,11 @@
     <style name="Black_Text_16">
         <item name="android:textColor">@android:color/black</item>
         <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="Green_param_16">
+        <item name="android:textColor">#4bcf51</item>
+        <item name="android:textSize">18sp</item>
     </style>
 
     <style name="Green_Dark_Text_16">
@@ -81,6 +88,12 @@
     <style name="Gray_Text_14">
         <item name="android:textColor">@android:color/darker_gray</item>
         <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Green_remote_item_14">
+        <item name="android:textColor">#45e24c</item>
+        <item name="android:textSize">14sp</item>
+
     </style>
 
     <style name="unit_12">

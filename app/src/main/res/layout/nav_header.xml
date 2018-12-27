@@ -3,7 +3,6 @@
     android:id="@+id/nav_header_root"
     android:layout_width="match_parent"
     android:layout_height="180dp"
-    android:background="@drawable/header"
     android:fitsSystemWindows="true">
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -11,7 +10,7 @@
         android:layout_width="65dp"
         android:layout_height="65dp"
         android:layout_centerInParent="true"
-        android:src="@drawable/cat" />
+        android:src="@drawable/catcat" />
 
     <TextView
         android:id="@+id/user_name"

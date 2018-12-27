@@ -29,21 +29,4 @@ public class NoteActivity extends SingleFragmentActivity {
         return noteDetailFragment.newInstance(id);
     }
 
-
-    /*@Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fragment);
-
-        FragmentManager fm = getSupportFragmentManager();
-        Fragment fragment = fm.findFragmentById(R.id.fragment_contain);
-
-        if (fragment == null){
-            fragment = new StudentFragment();
-            fm.beginTransaction()
-                    .add(R.id.fragment_contain,fragment)
-                    .commit();
-        }
-    }*/
-
 }

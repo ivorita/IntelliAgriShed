@@ -39,7 +39,7 @@
         <EditText
             android:id="@+id/username"
             android:layout_width="264dp"
-            android:layout_height="34dp"
+            android:layout_height="40dp"
             android:layout_marginStart="48dp"
             android:layout_marginTop="55dp"
             android:background="@drawable/radius"
@@ -54,7 +54,7 @@
         <EditText
             android:id="@+id/password"
             android:layout_width="264dp"
-            android:layout_height="34dp"
+            android:layout_height="40dp"
             android:layout_marginStart="48dp"
             android:layout_marginTop="26dp"
             android:background="@drawable/radius"
@@ -97,10 +97,10 @@
         <Button
             android:id="@+id/login_btn"
             android:layout_width="264dp"
-            android:layout_height="34dp"
+            android:layout_height="40dp"
             android:layout_marginStart="45dp"
-            android:layout_marginTop="50dp"
-            android:background="@drawable/gradient"
+            android:layout_marginTop="44dp"
+            android:background="@drawable/gradient_selector"
             android:elevation="5dp"
             android:text="登&#8195;录"
             android:textColor="#ffff"

@@ -32,7 +32,6 @@ public class ServerThread extends Thread {
             while (mSocket != null) {
                 TimerDelay(TCPUDInfo.SendTimeInterval);
                 sendHexData(TCPUDInfo.ReadSomething);
-                //sendHexData(TCPUDInfo.RelayOff5);
                 try {
                     if ((in.read(mTCPUDInfo.ReceiveBuffer)) != -1) {
                         //一旦出现06，过滤掉
@@ -77,20 +76,14 @@ public class ServerThread extends Thread {
         }
     }
 
-    void sendHexData(byte[] SendData) {
+    public void sendHexData(byte[] SendData) {
         try {
-            /*if (out != null) {
-
-            } else {
-                Log.d(TAG, "out null" );
-            }*/
             out.write(SendData);
         } catch (Exception e2) {
             e2.printStackTrace();
             Log.e(TAG, "error " + e2.toString() );
         }
     }
-
 
     /**
      * 创建Socket
@@ -116,7 +109,6 @@ public class ServerThread extends Thread {
                 Message msg1 = new Message();
                 msg1.what = 0xffff;
                 TCPUDInfo.mHandler.sendMessage(msg1);    //服务器连接成功！
-                //sendHexData(TCPUDInfo.ReadSomething);
                 //第一次连接成功，则显示true,此后该变量值不变
                 First_Create_TCP = true;
             } catch (UnknownHostException e) {
@@ -141,7 +133,6 @@ public class ServerThread extends Thread {
             }
         }
     }
-
 
     /**
      * 停止Socket

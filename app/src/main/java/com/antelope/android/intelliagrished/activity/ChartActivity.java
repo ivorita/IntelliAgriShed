@@ -1,39 +1,41 @@
 package com.antelope.android.intelliagrished.activity;
 
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.antelope.android.intelliagrished.R;
 import com.antelope.android.intelliagrished.utils.DynamicLineChartManager;
+import com.antelope.android.intelliagrished.utils.TCPUDInfo;
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.AxisBase;
-import com.github.mikephil.charting.components.Description;
-import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.antelope.android.intelliagrished.fragment.envFragment.env_values;
-
 public class ChartActivity extends AppCompatActivity {
 
     @BindView(R.id.line)
     LineChart mLine;
-    private String[] titles = {"一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"};
+    @BindView(R.id.line_1)
+    LineChart mLine1;
 
-    private DynamicLineChartManager dynamicLineChartManager1;
-    private DynamicLineChartManager dynamicLineChartManager2;
-    private List<Integer> list = new ArrayList<>(); //数据集合
-    private List<String> names = new ArrayList<>(); //折线名字集合
-    private List<Integer> color = new ArrayList<>();//折线颜色集合
+    private int air_tmp;
+
+    private DynamicLineChartManager dynamicLineChartManager_air;
+    private DynamicLineChartManager dynamicLineChartManager_soil;
+    private List<Integer> list_air = new ArrayList<>(); //数据集合
+    private List<String> names_air = new ArrayList<>(); //折线名字集合
+    private List<Integer> color_air = new ArrayList<>();//折线颜色集合
+
+    private List<Integer> list_soil = new ArrayList<>(); //数据集合
+    private List<String> names_soil = new ArrayList<>(); //折线名字集合
+    private List<Integer> color_soil = new ArrayList<>();//折线颜色集合
 
 
     @Override
@@ -42,57 +44,97 @@ public class ChartActivity extends AppCompatActivity {
         setContentView(R.layout.history_chart);
         ButterKnife.bind(this);
 
+        chartAirInit();
+
+        chartSoilInit();
+
+    }
+
+    /**
+     * 空气环境Chart
+     */
+    private void chartAirInit() {
         //折线名字
-        names.add("温度");
+        names_air.add("空气温度");
+        names_air.add("空气湿度");
+        names_air.add("光照强度");
+        names_air.add("CO₂浓度");
         //折线颜色
-        color.add(R.color.c_blue);
-
-        dynamicLineChartManager1 = new DynamicLineChartManager(mLine, "温度", R.color.c_blue);
-
-        dynamicLineChartManager1.setYAxis(100, 0, 10);
+        color_air.add(getResources().getColor(R.color.air_temp,getTheme()));
+        color_air.add(getResources().getColor(R.color.green,getTheme()));
+        color_air.add(getResources().getColor(R.color.light,getTheme()));
+        color_air.add(getResources().getColor(R.color.co_2,getTheme()));
 
         mLine.setDrawBorders(true);
 
-        dynamicLineChartManager1.setDescription("");
+        dynamicLineChartManager_air = new DynamicLineChartManager(mLine, names_air, color_air);
+        dynamicLineChartManager_air.setDescription();
+        dynamicLineChartManager_air.setYAxis(600, 0, 10);
+    }
 
-        //if (!env_values.isEmpty()){
-            dynamicLineChartManager1.addEntry(env_values);
-        //} else {
-            //dynamicLineChartManager1.addEntry(0);
-        //}
+    /**
+     * 湿度环境Chart
+     */
+    private void chartSoilInit() {
+        //折线名字
+        names_soil.add("土壤温度");
+        names_soil.add("土壤湿度");
+        names_soil.add("盐溶解度");
+        names_soil.add("酸碱度");
+        //折线颜色
+        color_soil.add(getResources().getColor(R.color.soil_temp,getTheme()));
+        color_soil.add(getResources().getColor(R.color.soil_humi,getTheme()));
+        color_soil.add(getResources().getColor(R.color.salt,getTheme()));
+        color_soil.add(getResources().getColor(R.color.ph,getTheme()));
 
+        mLine1.setDrawBorders(true);
 
-//        List<Entry> entries = new ArrayList<>();
-//        for (int i = 0; i < 12; i++) {
-//            if (!env_values.isEmpty()){
-//                entries.add(new Entry(i, env_values.get(i)));
-//            } else {
-//                entries.add(new Entry(i,0));
-//            }
-//        }
+        dynamicLineChartManager_soil = new DynamicLineChartManager(mLine1, names_soil, color_soil);
+        dynamicLineChartManager_soil.setDescription();
+        dynamicLineChartManager_soil.setYAxis(80, 0, 10);
+    }
 
-//        LineDataSet lineDataSet = new LineDataSet(entries, "温度");
-//        //线模式为圆滑曲线（默认折线）
-//        lineDataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
-//        LineData lineData = new LineData(lineDataSet);
-//        mLine.setData(lineData);
+    @Override
+    protected void onResume() {
+        super.onResume();
 
-        //X轴设置在底部，字符形式
-//        XAxis xAxis = mLine.getXAxis();
-//        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-//        xAxis.setValueFormatter(new IAxisValueFormatter() {
-//            @Override
-//            public String getFormattedValue(float value, AxisBase axis) {
-//                return timeList.get((int) value % timeList.size());
-//            }
-//        });
-//        //xAxis.setLabelCount(12, true);
-//
-//        //设置描述内容
-//        Description description = new Description();
-//        description.setText("时间(s)");
-//        description.setTextColor(R.color.c_blue);
-//        mLine.setDescription(description);
-
+        TCPUDInfo.mHandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                switch (msg.what) {
+                    case 0x0010:
+                        if (msg.arg1 > 100) {
+                            msg.arg1 = 100;
+                        }
+                        air_tmp = msg.arg1;
+                        list_air.add(air_tmp);
+                        list_air.add(msg.arg2);
+                        if (msg.arg2 > 100) {
+                            msg.arg2 = 100;
+                        }
+                        break;
+                    case 0x0011:
+                        list_air.add(msg.arg1);
+                        list_air.add(msg.arg2);
+                        dynamicLineChartManager_air.addEntry(list_air);
+                        list_air.clear();
+                        break;
+                    case 0x0012:
+                        Log.d("ChartActivity", "土壤温度：" + msg.arg1);
+                        list_soil.add(msg.arg1);
+                        list_soil.add(msg.arg2);
+                        break;
+                    case 0x0013:
+                        list_soil.add(msg.arg1 / 10);
+                        list_soil.add(msg.arg2 / 10);
+                        dynamicLineChartManager_soil.addEntry(list_soil);
+                        list_soil.clear();
+                        break;
+                    default:
+                        super.handleMessage(msg);
+                        break;
+                }
+            }
+        };
     }
 }

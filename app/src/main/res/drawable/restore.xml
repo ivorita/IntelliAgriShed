@@ -4,14 +4,14 @@
     <item android:state_window_focused="false">
         <shape android:shape="rectangle">
             <corners android:radius="15dp"/>
-            <solid android:color="#CD3D3E"/>
+            <solid android:color="#fa5b5b"/>
         </shape>
     </item>
 
     <item android:state_pressed="true">
         <shape android:shape="rectangle">
             <corners android:radius="15dp"/>
-            <solid android:color="#651E1F"/>
+            <solid android:color="#de5050"/>
         </shape>
     </item>
 

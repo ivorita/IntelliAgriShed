@@ -11,14 +11,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "noteBase.db";
 
-    private static final String CREATE_NOTE = "create table " + NoteDbSchema.NoteTable.NAME + "("
-            + "id integer primary key autoincrement,"
-            + NoteDbSchema.NoteTable.Cols.UUID + ","
-            + NoteDbSchema.NoteTable.Cols.TITLE  + ","
-            + NoteDbSchema.NoteTable.Cols.CONTENT  + ")";
-
-    private Context mContext;
-
     public MyDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
     }
@@ -35,8 +27,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 NoteDbSchema.NoteTable.Cols.DATE_TIME  +
                 ")"
         );
-        //db.execSQL(CREATE_NOTE);
-        //Toast.makeText(mContext,"Create succeeded",Toast.LENGTH_SHORT).show();
     }
 
     @Override

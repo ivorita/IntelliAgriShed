@@ -44,10 +44,7 @@ public class RecAdapter extends RecyclerView.Adapter<RecAdapter.ViewHolder> {
             @Override
             public void onClick(View view) {
                 int position = holder.getAdapterPosition();
-                //Rec_item rec_item = mItemList.get(position);
                 Toast.makeText(view.getContext(), "你点击第" + (position + 1) + "项", Toast.LENGTH_SHORT).show();
-                //Intent intent = NoteActivity.newIntent(getClass(),.get(i).getId());
-                //startActivity(intent);
             }
         });
 
@@ -58,20 +55,12 @@ public class RecAdapter extends RecyclerView.Adapter<RecAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         NoteBean noteBean = mItemList.get(position);
         holder.bind(noteBean);
-        //Rec_item item = mItemList.get(position);
-        //holder.mTitle.setText("test");
     }
 
     @Override
     public int getItemCount() {
         return mItemList.size();
     }
-
-    /*static class ViewHolder extends RecyclerView.ViewHolder {
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-        }
-    }*/
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener  {
         @BindView(R.id.item_time)

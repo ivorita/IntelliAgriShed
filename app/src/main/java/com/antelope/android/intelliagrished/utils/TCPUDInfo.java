@@ -72,8 +72,8 @@ public class TCPUDInfo {
     static byte[] RelayOn8 = new byte[]{-2, -2, 0x00, 0x00, 0x00, 0x06, 0x01, 0x06, 0x00, 0x10, 0x00, 0x01};
     static byte[] RelayOff8 = new byte[]{-2, -2, 0x00, 0x00, 0x00, 0x06, 0x01, 0x06, 0x00, 0x10, 0x00, 0x00};
 
-    static byte[] RelayOn9 = new byte[]{-2, -2, 0x00, 0x00, 0x00, 0x06, 0x01, 0x06, 0x00, 0x11, 0x00, 0x01};
-    static byte[] RelayOff9 = new byte[]{-2, -2, 0x00, 0x00, 0x00, 0x06, 0x01, 0x06, 0x00, 0x11, 0x00, 0x00};
+    public static byte[] RelayOn9 = new byte[]{-2, -2, 0x00, 0x00, 0x00, 0x06, 0x01, 0x06, 0x00, 0x11, 0x00, 0x01};
+    public static byte[] RelayOff9 = new byte[]{-2, -2, 0x00, 0x00, 0x00, 0x06, 0x01, 0x06, 0x00, 0x11, 0x00, 0x00};
 
     static byte[] RelayOn10 = new byte[]{-2, -2, 0x00, 0x00, 0x00, 0x06, 0x01, 0x06, 0x00, 0x12, 0x00, 0x01};
     static byte[] RelayOff10 = new byte[]{-2, -2, 0x00, 0x00, 0x00, 0x06, 0x01, 0x06, 0x00, 0x12, 0x00, 0x00};
@@ -114,7 +114,7 @@ public class TCPUDInfo {
     public static boolean[] DigitalInput = new boolean[8];
 
     //发送基本信息
-    void SendBaseInfo() {
+    void SendBaseInfo(){
         Log.d("TCPDUINFO", "run: 基本信息发送");
         int Temp = 0;
         int Temp1 = 0;
@@ -134,6 +134,7 @@ public class TCPUDInfo {
         }
         //空气环境：温度
         BaseInfo1.arg1 = (ReceiveBuffer[9] + Temp) * 256 + ReceiveBuffer[10] + Temp1;
+        Log.d("TCPUDInfo", "温度:" + BaseInfo1.arg1);
 
         if (ReceiveBuffer[11] < 0) {
             Temp = 256;
@@ -197,8 +198,6 @@ public class TCPUDInfo {
         }
         //土壤环境：温度
         BaseInfo3.arg1 = (ReceiveBuffer[17] + Temp) * 256 + ReceiveBuffer[18] + Temp1;
-
-        env_values = (ReceiveBuffer[17] + Temp) * 256 + ReceiveBuffer[18] + Temp1;
 
         if (ReceiveBuffer[19] < 0) {
             Temp = 256;

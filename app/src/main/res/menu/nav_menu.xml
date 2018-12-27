@@ -10,6 +10,12 @@
             android:icon="@mipmap/history" />
 
         <item
+            android:id="@+id/message_my"
+            android:title="我的消息"
+            android:icon="@drawable/message"
+            />
+
+        <item
             android:id="@+id/about"
             android:title="关于app"
             android:icon="@mipmap/about"/>

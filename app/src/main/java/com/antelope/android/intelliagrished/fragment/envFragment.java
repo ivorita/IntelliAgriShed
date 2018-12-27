@@ -1,8 +1,16 @@
 package com.antelope.android.intelliagrished.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -10,6 +18,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,6 +32,7 @@ import com.antelope.android.intelliagrished.db.DailyForecast;
 import com.antelope.android.intelliagrished.db.Weather;
 import com.antelope.android.intelliagrished.utils.AutoUpdateService;
 import com.antelope.android.intelliagrished.utils.HttpUtil;
+import com.antelope.android.intelliagrished.utils.ServerThread;
 import com.antelope.android.intelliagrished.utils.TCPUDInfo;
 import com.antelope.android.intelliagrished.utils.Utility;
 
@@ -71,6 +81,8 @@ public class envFragment extends Fragment {
 
     private SharedPreferences sharedPreferences;
 
+    ServerThread mServerThread = new ServerThread();
+
     private int air_tmp;
     private int air_humidity;
     private int illumination_int;
@@ -88,10 +100,6 @@ public class envFragment extends Fragment {
     private String salt_s;
     private String pH_value;
 
-    public static int env_values;
-
-    //public static List<Integer> env_values = new ArrayList<>();
-
     public static envFragment newInstance() {
         envFragment fragment = new envFragment();
         return fragment;
@@ -104,6 +112,42 @@ public class envFragment extends Fragment {
         unbinder = ButterKnife.bind(this, view);
         mSwipeRefresh.setColorSchemeResources(R.color.c_blue);
         return view;
+    }
+
+    //悬浮通知
+    private void notification(String tips) {
+        NotificationManager manager = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+        Notification notification;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("1",
+                    "channel1", NotificationManager.IMPORTANCE_DEFAULT);
+            channel.enableLights(true);
+            channel.setLightColor(Color.RED);
+            manager.createNotificationChannel(channel);
+
+            /*Notification API不稳定，几乎Android系统的每一个版本都会对通知进行修改，
+            使用support-v4库中提供的NotificationCompat类的构造器来创建Notification对象，
+            就可以保证我们的程序在所有的Android系统版本上都能正常工作了*/
+            notification = new NotificationCompat.Builder(getActivity(), "1")
+                    .setContentTitle("温馨提示")
+                    .setContentText(tips)
+                    .setWhen(System.currentTimeMillis())
+                    .setSmallIcon(R.mipmap.qd3)
+                    .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.qd3))
+                    .build();
+        } else {
+            notification = new NotificationCompat.Builder(getActivity())
+                    .setContentTitle("ContentTitle")
+                    .setContentText("ContentText")
+                    .setWhen(System.currentTimeMillis())
+                    .setSmallIcon(R.mipmap.qd3)
+                    .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.qd3))
+                    .build();
+        }
+
+        //让通知显示出来，每个通知所指定的id是不同的
+        manager.notify(1, notification);
     }
 
     @Override
@@ -179,11 +223,7 @@ public class envFragment extends Fragment {
                                     .getDefaultSharedPreferences(getContext()).edit();
                             editor.putString("weather", responseText1);
                             editor.apply();
-                            //这里多添加了weatherId是为了重启软件刷新后，获得的地区不是第一次缓存的地区
-                            //mWeatherId = weather.basic.weatherId;
-                            //showWeatherInfo(weather);
                         } else {
-                            //Toast.makeText(getContext(), "获取天气信息失败", Toast.LENGTH_LONG).show();
                             Log.e(TAG, "获取天气信息失败");
                         }
                         mSwipeRefresh.setRefreshing(false);
@@ -213,12 +253,9 @@ public class envFragment extends Fragment {
         if (weatherString != null) {
             //有缓存时直接解析天气数据
             Weather weather = Utility.handleWeatherResponse(weatherString);
-            //mWeatherId = weather.basic.weatherId;
-            //Log.d("WeatherId", mWeatherId);
             showWeatherInfo(weather);
         } else {
             //没有缓存时去服务器查询数据
-            //mWeatherId = getIntent().getStringExtra("weather_id");
             requestWeather();
         }
 
@@ -240,12 +277,32 @@ public class envFragment extends Fragment {
                         }
                         air_humidity = msg.arg2;
                         mAirHumidityValue.setText(String.valueOf(msg.arg2)); // 空气环境：湿度
-                        //env_values.add(msg.arg1);
-                        //env_values = msg.arg1;
                         break;
                     case 0x0011:
                         illumination_int = msg.arg1;
                         co2 = msg.arg2;
+                        if (illumination_int > 139) {
+                            notification("光照强度过高");
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    mServerThread.sendHexData(TCPUDInfo.RelayOff9);
+                                }
+                            }).start();
+                        } else if (illumination_int < 12){
+                            notification("光照强度不足");
+                            Log.d(TAG, "handleMessage: 补光灯开启");
+
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    mServerThread.sendHexData(TCPUDInfo.RelayOn9);
+                                }
+                            }).start();
+                        }
+                        if (co2 > 600) {
+                            notification("CO₂浓度过高");
+                        }
                         mIllumination.setText(String.valueOf(msg.arg1)); // 空气环境：光照
                         mCo2.setText(String.valueOf(msg.arg2)); // 空气环境：二氧化碳
                         break;
@@ -256,8 +313,8 @@ public class envFragment extends Fragment {
                         mSoilHumidityValue.setText(String.valueOf(msg.arg2)); // 土壤环境：湿度
                         break;
                     case 0x0013:
-                        salt = (double)msg.arg1;
-                        ph = (double)msg.arg2;
+                        salt = (double) msg.arg1;
+                        ph = (double) msg.arg2;
                         mSaltSolubility.setText(String.valueOf((double) msg.arg1 / 10)); // 土壤环境：盐溶解度
                         mPHValue.setText(String.valueOf((double) msg.arg2 / 10)); // 土壤环境：PH值
                         break;
@@ -268,6 +325,7 @@ public class envFragment extends Fragment {
             }
         };
 
+        //下拉刷新天气
         mSwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -315,12 +373,12 @@ public class envFragment extends Fragment {
         Log.d(TAG, "onPause: " + "humidity_soil：" + humidity_soil);
 
         //盐溶解度
-        salt_s = String.valueOf(salt/10);
+        salt_s = String.valueOf(salt / 10);
         editor.putString("salt_solubility", salt_s);
         Log.d(TAG, "onPause: " + "salt_s：" + salt_s);
 
         //pH值
-        pH_value = String.valueOf(ph/10);
+        pH_value = String.valueOf(ph / 10);
         editor.putString("pH_value", pH_value);
         Log.d(TAG, "onPause: " + "pH_value：" + pH_value);
 
@@ -330,7 +388,6 @@ public class envFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        unbinder.unbind();
     }
 
 }

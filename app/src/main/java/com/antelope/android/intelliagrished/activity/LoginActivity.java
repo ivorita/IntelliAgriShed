@@ -121,9 +121,6 @@ public class LoginActivity extends AppCompatActivity {
                             //获取当前用户信息
                             User user1 = BmobUser.getCurrentUser(User.class);
                             Toast.makeText(LoginActivity.this,"登录成功",Toast.LENGTH_LONG).show();
-//                            Snackbar snackbar = Snackbar.make(view, "登录成功", Snackbar.LENGTH_SHORT);
-//                            snackbar.getView().setBackgroundColor(getResources().getColor(R.color.green));
-//                            snackbar.show();
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             intent.putExtra("name",uName);
                             startActivity(intent);

@@ -4,6 +4,15 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="c_blue">#2196F3</color>
+    <color name="air_temp">#4289ff</color>
+    <color name="soil_temp">#4289ff</color>
+    <color name="soil_humi">#74450f</color>
+    <color name="salt">#1d9f8e</color>
+    <color name="ph">#99650b</color>
     <color name="hint">#7b7b7b</color>
+    <color name="off_state">#757575</color>
+    <color name="on_state">#15bc1d</color>
     <color name="green">#4caf50</color>
+    <color name="light">#ff8a01</color>
+    <color name="co_2">#00bcde</color>
 </resources>

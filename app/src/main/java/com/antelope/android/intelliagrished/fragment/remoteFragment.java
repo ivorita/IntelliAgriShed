@@ -297,6 +297,7 @@ public class remoteFragment extends Fragment {
                     case 0x0004: // 继电器4 1号侧帘 的消息句柄
                         mCurtain.setImageResource(R.drawable.curtain_on);
                         mCurtainStatus.setText(R.string.turn_on);
+                        mCurtainStatus.setTextColor(getResources().getColor(R.color.on_state));
                         if (TCPUDInfo.firstInitButtonName[3] == false) {
                             TCPUDInfo.firstInitButtonName[3] = true;
                             TCPUDInfo.DigitalOutput[3] = true;
@@ -305,6 +306,7 @@ public class remoteFragment extends Fragment {
                     case 0x1004: // 继电器4 1号侧帘 关闭的消息句柄
                         mCurtain.setImageResource(R.drawable.curtain_off);
                         mCurtainStatus.setText(R.string.turn_off);
+                        mCurtainStatus.setTextColor(getResources().getColor(R.color.off_state));
                         if (TCPUDInfo.firstInitButtonName[3] == false) {
                             TCPUDInfo.firstInitButtonName[3] = true;
                             TCPUDInfo.DigitalOutput[3] = false;
@@ -315,6 +317,7 @@ public class remoteFragment extends Fragment {
                         Log.d(TAG, "handleMessage: " + msg.arg1);
                         mDoor1.setImageResource(R.drawable.door_open);
                         mDoor1Status.setText(R.string.turn_on);
+                        mDoor1Status.setTextColor(getResources().getColor(R.color.on_state));
                         if (TCPUDInfo.firstInitButtonName[4] == false) {
                             TCPUDInfo.firstInitButtonName[4] = true;
                             TCPUDInfo.DigitalOutput[4] = true;
@@ -323,6 +326,7 @@ public class remoteFragment extends Fragment {
                     case 0x1005: // 继电器5 1号顶窗 关闭的消息句柄
                         mDoor1.setImageResource(R.drawable.door_close);
                         mDoor1Status.setText(R.string.turn_off);
+                        mDoor1Status.setTextColor(getResources().getColor(R.color.off_state));
                         if (TCPUDInfo.firstInitButtonName[4] == false) {
                             TCPUDInfo.firstInitButtonName[4] = true;
                             TCPUDInfo.DigitalOutput[4] = false;
@@ -331,6 +335,7 @@ public class remoteFragment extends Fragment {
                     case 0x0006: // 继电器6 2号顶窗 开启的消息句柄
                         mDoor2.setImageResource(R.drawable.door_open);
                         mDoor2Status.setText(R.string.turn_on);
+                        mDoor2Status.setTextColor(getResources().getColor(R.color.on_state));
                         if (TCPUDInfo.firstInitButtonName[5] == false) {
                             TCPUDInfo.firstInitButtonName[5] = true;
                             TCPUDInfo.DigitalOutput[5] = true;
@@ -339,6 +344,7 @@ public class remoteFragment extends Fragment {
                     case 0x1006: // 继电器6 2号顶窗 关闭的消息句柄
                         mDoor2.setImageResource(R.drawable.door_close);
                         mDoor2Status.setText(R.string.turn_off);
+                        mDoor2Status.setTextColor(getResources().getColor(R.color.off_state));
                         if (TCPUDInfo.firstInitButtonName[5] == false) {
                             TCPUDInfo.firstInitButtonName[5] = true;
                             TCPUDInfo.DigitalOutput[5] = false;
@@ -347,6 +353,7 @@ public class remoteFragment extends Fragment {
                     case 0x0007: // 继电器7 1号侧窗 开启的消息句柄
                         mDoor3.setImageResource(R.drawable.door_open);
                         mDoor3Status.setText(R.string.turn_on);
+                        mDoor3Status.setTextColor(getResources().getColor(R.color.on_state));
                         if (TCPUDInfo.firstInitButtonName[6] == false) {
                             TCPUDInfo.firstInitButtonName[6] = true;
                             TCPUDInfo.DigitalOutput[6] = true;
@@ -355,6 +362,7 @@ public class remoteFragment extends Fragment {
                     case 0x1007: // 继电器7 1号侧窗 关闭的消息句柄
                         mDoor3.setImageResource(R.drawable.door_close);
                         mDoor3Status.setText(R.string.turn_off);
+                        mDoor3Status.setTextColor(getResources().getColor(R.color.off_state));
                         if (TCPUDInfo.firstInitButtonName[6] == false) {
                             TCPUDInfo.firstInitButtonName[6] = true;
                             TCPUDInfo.DigitalOutput[6] = false;
@@ -367,6 +375,7 @@ public class remoteFragment extends Fragment {
                             mFan.startAnimation(rotate);
                         }
                         mFanStatus.setText(R.string.turn_on);
+                        mFanStatus.setTextColor(getResources().getColor(R.color.on_state));
                         if (TCPUDInfo.firstInitButtonName[7] == false) {
                             TCPUDInfo.firstInitButtonName[7] = true;
                             TCPUDInfo.DigitalOutput[7] = true;
@@ -376,6 +385,7 @@ public class remoteFragment extends Fragment {
                         mFan.clearAnimation();
                         mFan.setImageResource(R.drawable.fan_off);
                         mFanStatus.setText(R.string.turn_off);
+                        mFanStatus.setTextColor(getResources().getColor(R.color.off_state));
                         if (TCPUDInfo.firstInitButtonName[7] == false) {
                             TCPUDInfo.firstInitButtonName[7] = true;
                             TCPUDInfo.DigitalOutput[7] = false;
@@ -385,6 +395,7 @@ public class remoteFragment extends Fragment {
                         Log.d(TAG, "handleMessage: 9");
                         mLight.setImageResource(R.drawable.light_on);
                         mLightStatus.setText(R.string.turn_on);
+                        mLightStatus.setTextColor(getResources().getColor(R.color.on_state));
                         if (TCPUDInfo.firstInitButtonName[8] == false) {
                             TCPUDInfo.firstInitButtonName[8] = true;
                             TCPUDInfo.DigitalOutput[8] = true;
@@ -393,6 +404,7 @@ public class remoteFragment extends Fragment {
                     case 0x1009: // 继电器9 补光灯 关闭的消息句柄
                         mLight.setImageResource(R.drawable.light_off);
                         mLightStatus.setText(R.string.turn_off);
+                        mLightStatus.setTextColor(getResources().getColor(R.color.off_state));
                         if (TCPUDInfo.firstInitButtonName[8] == false) {
                             TCPUDInfo.firstInitButtonName[8] = true;
                             TCPUDInfo.DigitalOutput[8] = false;
@@ -417,6 +429,7 @@ public class remoteFragment extends Fragment {
                             mWarmAir1.startAnimation(rotate_w1);
                         }
                         mWarmStatus1.setText(R.string.turn_on);
+                        mWarmStatus1.setTextColor(getResources().getColor(R.color.on_state));
                         if (TCPUDInfo.firstInitButtonName[11] == false) {
                             TCPUDInfo.firstInitButtonName[11] = true;
                             TCPUDInfo.DigitalOutput[11] = true;
@@ -426,6 +439,7 @@ public class remoteFragment extends Fragment {
                         mWarmAir1.clearAnimation();
                         mWarmAir1.setImageResource(R.drawable.warm_air_off);
                         mWarmStatus1.setText(R.string.turn_off);
+                        mWarmStatus1.setTextColor(getResources().getColor(R.color.off_state));
                         if (TCPUDInfo.firstInitButtonName[11] == false) {
                             TCPUDInfo.firstInitButtonName[11] = true;
                             TCPUDInfo.DigitalOutput[11] = false;
@@ -438,6 +452,7 @@ public class remoteFragment extends Fragment {
                             mWarmAir2.startAnimation(rotate_w2);
                         }
                         mWarmStatus2.setText(R.string.turn_on);
+                        mWarmStatus2.setTextColor(getResources().getColor(R.color.on_state));
                         if (TCPUDInfo.firstInitButtonName[12] == false) {
                             TCPUDInfo.firstInitButtonName[12] = true;
                             TCPUDInfo.DigitalOutput[12] = true;
@@ -445,8 +460,9 @@ public class remoteFragment extends Fragment {
                         break;
                     case 0x100d: // 继电器13 2号暖风机 关闭的消息句柄
                         mWarmAir2.clearAnimation();
-                        mWarmAir2.setImageResource(R.drawable.warm_air);
+                        mWarmAir2.setImageResource(R.drawable.warm_air_off);
                         mWarmStatus2.setText(R.string.turn_off);
+                        mWarmStatus2.setTextColor(getResources().getColor(R.color.off_state));
                         if (TCPUDInfo.firstInitButtonName[12] == false) {
                             TCPUDInfo.firstInitButtonName[12] = true;
                             TCPUDInfo.DigitalOutput[12] = false;
@@ -467,6 +483,7 @@ public class remoteFragment extends Fragment {
                     case 0x000f: // 继电器15 灌溉阀门 开启的消息句柄
                         mIrrigation.setImageResource(R.drawable.irrigation_on);
                         mIrrigationStatus.setText(R.string.turn_on);
+                        mIrrigationStatus.setTextColor(getResources().getColor(R.color.on_state));
                         if (TCPUDInfo.firstInitButtonName[14] == false) {
                             TCPUDInfo.firstInitButtonName[14] = true;
                             TCPUDInfo.DigitalOutput[14] = true;
@@ -475,6 +492,7 @@ public class remoteFragment extends Fragment {
                     case 0x100f: // 继电器15 灌溉阀门 关闭的消息句柄
                         mIrrigation.setImageResource(R.drawable.irrigation_off);
                         mIrrigationStatus.setText(R.string.turn_off);
+                        mIrrigationStatus.setTextColor(getResources().getColor(R.color.off_state));
                         if (TCPUDInfo.firstInitButtonName[14] == false) {
                             TCPUDInfo.firstInitButtonName[14] = true;
                             TCPUDInfo.DigitalOutput[14] = false;

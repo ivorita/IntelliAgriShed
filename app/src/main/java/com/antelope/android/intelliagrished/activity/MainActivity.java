@@ -12,11 +12,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,9 +28,6 @@ import com.antelope.android.intelliagrished.fragment.noteFragment;
 import com.antelope.android.intelliagrished.fragment.paramFragment;
 import com.antelope.android.intelliagrished.fragment.remoteFragment;
 import com.antelope.android.intelliagrished.utils.ServerThread;
-import com.antelope.android.intelliagrished.utils.WriteCmdTask;
-
-import java.util.Timer;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,18 +35,18 @@ import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = "MainActivity";
-
     @BindView(R.id.nav_view)
     NavigationView mNavView;
     @BindView(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
-    /*@BindView(R.id.about)
-    LinearLayout mAbout;
-    @BindView(R.id.history)
-    LinearLayout mHistory;*/
+    @BindView(R.id.exit)
+    LinearLayout mExit;
+    @BindView(R.id.night)
+    ImageView mNight;
+    @BindView(R.id.setting)
+    LinearLayout mSetting;
     private boolean ExitState = false;
     private long ExitTime = 0;
 
@@ -136,13 +134,11 @@ public class MainActivity extends AppCompatActivity {
                 switch (menuItem.getItemId()) {
                     case R.id.history:
                         mDrawerLayout.closeDrawers();
-                        Toast.makeText(MainActivity.this, "历史记录", Toast.LENGTH_SHORT).show();
                         intent = new Intent(MainActivity.this, ChartActivity.class);
                         startActivity(intent);
                         break;
                     case R.id.about:
                         mDrawerLayout.closeDrawers();
-                        Toast.makeText(MainActivity.this, "关于app", Toast.LENGTH_SHORT).show();
                         intent = new Intent(MainActivity.this, AboutActivity.class);
                         startActivity(intent);
                         break;
@@ -154,8 +150,6 @@ public class MainActivity extends AppCompatActivity {
         setHeaderValue();
 
         mServerThread.start();
-
-        //InitWriteCmdTimer();
     }
 
     //设置抽屉用户名
@@ -216,25 +210,22 @@ public class MainActivity extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }
 
-    // 开机1秒钟之后，每隔2秒钟检索一次发送队列，并操作发送队列发送写指令
-    private void InitWriteCmdTimer() {
-        Timer time = new Timer();
-        time.schedule(new WriteCmdTask(), 1000, 2000);
-        Log.d(TAG, "InitWriteCmdTimer: " + "executed");
-        Toast.makeText(MainActivity.this, "MainActivity InitWriteCmdTimer", Toast.LENGTH_SHORT).show();
-    }
-
-    /*@OnClick({R.id.about, R.id.history})
+    @OnClick({R.id.night, R.id.setting, R.id.exit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.about:
-                mDrawerLayout.closeDrawers();
-                Toast.makeText(MainActivity.this,"关于app",Toast.LENGTH_SHORT).show();
+            case R.id.night:
+                Toast.makeText(MainActivity.this, "夜间模式", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.history:
-                mDrawerLayout.closeDrawers();
-                Toast.makeText(MainActivity.this,"历史记录",Toast.LENGTH_SHORT).show();
+            case R.id.setting:
+                Intent intent = new Intent(MainActivity.this, SettingActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.exit:
+                finish();
+                break;
+            default:
                 break;
         }
-    }*/
+    }
+
 }

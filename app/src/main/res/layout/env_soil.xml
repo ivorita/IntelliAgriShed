@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:background="@android:color/white"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardElevation="3dp"
-    app:cardCornerRadius="3dp"
     android:layout_marginStart="@dimen/card_margin"
-    android:layout_marginEnd="@dimen/card_margin">
+    android:layout_marginEnd="@dimen/card_margin"
+    android:background="@android:color/white"
+    app:cardCornerRadius="3dp"
+    app:cardElevation="3dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,88 +16,88 @@
         android:orientation="vertical">
 
         <TextView
+            style="@style/Gray_Text_18"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/soil_environ"
             android:layout_marginStart="@dimen/title_margin_start"
             android:layout_marginTop="8dp"
             android:paddingStart="5dp"
-            style="@style/Gray_Text_18"/>
+            android:text="@string/soil_environ" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="16dp">
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
 
             <ImageView
-                android:src="@drawable/soil_tmp"
                 android:layout_width="0dp"
+                android:layout_height="46dp"
                 android:layout_weight="1"
-                android:layout_height="46dp"/>
+                android:src="@drawable/soil_tmp" />
 
             <ImageView
-                android:src="@drawable/soil_humi"
                 android:layout_width="0dp"
+                android:layout_height="46dp"
                 android:layout_weight="1"
-                android:layout_height="46dp"/>
+                android:src="@drawable/soil_humi" />
 
             <ImageView
-                android:src="@drawable/salt"
                 android:layout_width="0dp"
+                android:layout_height="46dp"
                 android:layout_weight="1"
-                android:layout_height="46dp"/>
+                android:src="@drawable/salt" />
 
             <ImageView
-                android:src="@drawable/ph"
                 android:layout_width="0dp"
+                android:layout_height="46dp"
                 android:layout_weight="1"
-                android:layout_height="46dp"/>
+                android:src="@drawable/ph" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_marginTop="12dp"
             android:layout_marginBottom="16dp"
-            android:layout_marginTop="12dp">
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
                 android:text="@string/soil_tmp"
-                android:textSize="18sp"
                 android:textColor="#4289ff"
-                android:gravity="center"/>
+                android:textSize="18sp" />
 
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
                 android:text="@string/soil_humidity"
-                android:textSize="18sp"
                 android:textColor="#74450f"
-                android:gravity="center"/>
+                android:textSize="18sp" />
 
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
                 android:text="@string/salt_s"
-                android:textSize="18sp"
                 android:textColor="#1d9f8e"
-                android:gravity="center"/>
+                android:textSize="18sp" />
 
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
                 android:text="@string/ph"
-                android:textSize="18sp"
                 android:textColor="#99650b"
-                android:gravity="center"/>
+                android:textSize="18sp" />
 
         </LinearLayout>
 
@@ -108,85 +108,85 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_weight="1"
                 android:gravity="center_horizontal"
-                android:orientation="horizontal"
-                android:layout_marginBottom="16dp">
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/soil_temp_value"
+                    style="@style/param_value_18"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="25"
-                    style="@style/param_value_18"
-                    android:layout_marginStart="10dp"/>
+                    android:layout_marginStart="10dp"
+                    tools:text="25" />
 
                 <TextView
+                    style="@style/unit_12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/cel"
-                    style="@style/unit_12"/>
+                    android:text="@string/cel" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:gravity="center_horizontal"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/soil_humidity_value"
+                    style="@style/param_value_18"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="75"
-                    style="@style/param_value_18"/>
+                    tools:text="75" />
 
                 <TextView
+                    style="@style/unit_12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/percent"
-                    style="@style/unit_12"/>
+                    android:text="@string/percent" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_horizontal">
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/salt_solubility"
+                    style="@style/param_value_18"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="9.8"
-                    style="@style/param_value_18"/>
+                    tools:text="9.8" />
 
                 <TextView
+                    style="@style/unit_12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/ms_cm"
-                    style="@style/unit_12"/>
+                    android:text="@string/ms_cm" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_horizontal">
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/pH_value"
+                    style="@style/param_value_18"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="7.6"
-                    style="@style/param_value_18"/>
+                    tools:text="7.6" />
 
             </LinearLayout>
 
@@ -194,7 +194,4 @@
 
     </LinearLayout>
 
-
-
-
-</android.support.v7.widget.CardView>
+</android.support.design.card.MaterialCardView>

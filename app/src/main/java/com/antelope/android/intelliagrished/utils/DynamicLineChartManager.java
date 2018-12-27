@@ -1,5 +1,7 @@
 package com.antelope.android.intelliagrished.utils;
 
+import android.util.Log;
+
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Description;
@@ -18,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 //图表管理类
-public class DynamicLineChartManager {
+public class DynamicLineChartManager{
 
     private LineChart lineChart;
     private YAxis leftAxis;
@@ -125,6 +127,7 @@ public class DynamicLineChartManager {
             lineDataSet.setLineWidth(1.5f);
             lineDataSet.setCircleRadius(1.5f);
             lineDataSet.setColor(colors.get(i));
+            Log.d("Dynamic", "initLineDataSet: color " + colors.get(i) );
 
             lineDataSet.setDrawFilled(true);
             lineDataSet.setCircleColor(colors.get(i));
@@ -256,13 +259,13 @@ public class DynamicLineChartManager {
     /**
      * 设置描述信息
      *
-     * @param str
+     * @param
      */
-    public void setDescription(String str) {
+    public void setDescription() {
         Description description = new Description();
-        description.setText(str);
+        //description.setText(str);
+        description.setEnabled(false);
         lineChart.setDescription(description);
-        lineChart.invalidate();
     }
 }
 

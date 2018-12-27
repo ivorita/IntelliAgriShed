@@ -5,25 +5,51 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!--<android.support.design.widget.AppBarLayout
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="空气环境数据" />
+
+    <android.support.design.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        android:layout_margin="6dp"
+        android:padding="8dp"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="3dp">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/line"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="#4bcf51"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:navigationIcon="@drawable/menu_back" />
+            android:layout_height="300dp"
+            android:layout_marginTop="2dp" />
 
-    </android.support.design.widget.AppBarLayout>-->
+    </android.support.design.card.MaterialCardView>
 
-    <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/line"
+    <View style="@style/setting_divider_style"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/title_margin_start"
+        android:paddingStart="5dp"
+        android:text="土壤环境数据" />
+
+    <android.support.design.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="300dp" />
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        android:padding="8dp"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="3dp">
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/line_1"
+            android:layout_width="match_parent"
+            android:layout_height="300dp" />
+
+    </android.support.design.card.MaterialCardView>
 
 </LinearLayout>
