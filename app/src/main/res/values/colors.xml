@@ -15,4 +15,5 @@
     <color name="green">#4caf50</color>
     <color name="light">#ff8a01</color>
     <color name="co_2">#00bcde</color>
+    <color name="black">@android:color/black</color>
 </resources>

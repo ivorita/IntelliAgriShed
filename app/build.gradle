@@ -54,4 +54,8 @@ dependencies {
     implementation 'com.squareup.okio:okio:2.1.0'
     //时间选择器
     implementation 'com.feezu.liuli:timeselector:+'
+    //Loading动效
+    implementation 'com.github.ybq:Android-SpinKit:1.2.0'
+    //加载跳动动画
+    implementation 'com.github.zzz40500:android-shapeLoadingView:1.0.3.2'
 }

@@ -118,8 +118,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginStart="20dp">
+                android:layout_marginStart="20dp"
+                android:orientation="horizontal">
 
                 <TextView
                     style="@style/Green_param_16"
@@ -138,8 +138,8 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:gravity="center"
-                    android:textColor="#757575"
-                    android:inputType="number" />
+                    android:inputType="number"
+                    android:textColor="#757575" />
 
                 <TextView
                     style="@style/Black_Text_16"
@@ -147,8 +147,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
-                    android:textColor="#757575"
-                    android:text="@string/dot" />
+                    android:text="@string/dot"
+                    android:textColor="#757575" />
 
                 <EditText
                     android:id="@+id/IpAddress2"
@@ -157,8 +157,8 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:gravity="center"
-                    android:textColor="#757575"
-                    android:inputType="number" />
+                    android:inputType="number"
+                    android:textColor="#757575" />
 
                 <TextView
                     style="@style/Black_Text_16"
@@ -166,8 +166,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
-                    android:textColor="#757575"
-                    android:text="@string/dot" />
+                    android:text="@string/dot"
+                    android:textColor="#757575" />
 
                 <EditText
                     android:id="@+id/IpAddress3"
@@ -176,8 +176,8 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:gravity="center"
-                    android:textColor="#757575"
-                    android:inputType="number" />
+                    android:inputType="number"
+                    android:textColor="#757575" />
 
                 <TextView
                     style="@style/Black_Text_16"
@@ -185,8 +185,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
-                    android:textColor="#757575"
-                    android:text="@string/dot" />
+                    android:text="@string/dot"
+                    android:textColor="#757575" />
 
                 <EditText
                     android:id="@+id/IpAddress4"
@@ -195,8 +195,8 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:gravity="center"
-                    android:textColor="#757575"
-                    android:inputType="number" />
+                    android:inputType="number"
+                    android:textColor="#757575" />
 
             </LinearLayout>
 
@@ -205,8 +205,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginStart="20dp">
+                android:layout_marginStart="20dp"
+                android:orientation="horizontal">
 
                 <TextView
                     style="@style/Green_param_16"
@@ -225,8 +225,8 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:gravity="center"
-                    android:textColor="#757575"
-                    android:inputType="number" />
+                    android:inputType="number"
+                    android:textColor="#757575" />
 
             </LinearLayout>
 
@@ -240,9 +240,9 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:layout_marginStart="16dp"
                     android:gravity="center"
-                    android:layout_marginStart="16dp">
+                    android:orientation="vertical">
 
                     <TextView
                         style="@style/Green_param_16"
@@ -265,7 +265,7 @@
                             android:layout_marginBottom="5dp"
                             android:gravity="center"
                             android:inputType="number"
-                            android:textColor="#757575"/>
+                            android:textColor="#757575" />
 
                         <TextView
                             style="@style/Green_param_16"
@@ -281,9 +281,9 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:layout_marginStart="20dp"
                     android:gravity="center"
-                    android:layout_marginStart="20dp">
+                    android:orientation="vertical">
 
                     <TextView
                         style="@style/Green_param_16"
@@ -305,7 +305,7 @@
                             android:layout_height="38dp"
                             android:gravity="center"
                             android:inputType="number"
-                            android:textColor="#757575"/>
+                            android:textColor="#757575" />
 
                         <TextView
                             style="@style/Green_param_16"
@@ -314,7 +314,6 @@
                             android:text="秒" />
 
                     </LinearLayout>
-
 
 
                 </LinearLayout>

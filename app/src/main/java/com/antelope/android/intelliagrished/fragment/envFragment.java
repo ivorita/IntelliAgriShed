@@ -1,6 +1,5 @@
 package com.antelope.android.intelliagrished.fragment;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -37,8 +36,6 @@ import com.antelope.android.intelliagrished.utils.TCPUDInfo;
 import com.antelope.android.intelliagrished.utils.Utility;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

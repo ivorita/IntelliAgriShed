@@ -1,5 +1,6 @@
 package com.antelope.android.intelliagrished.activity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import com.antelope.android.intelliagrished.R;
 import com.antelope.android.intelliagrished.bmob.User;
+import com.antelope.android.intelliagrished.utils.DialogUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -44,6 +46,8 @@ public class LoginActivity extends AppCompatActivity {
     CheckBox mRememberPass;
     private SharedPreferences sp;
     private SharedPreferences.Editor editor;
+
+    private Dialog mDialog;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -94,6 +98,7 @@ public class LoginActivity extends AppCompatActivity {
                 finish();
                 break;
             case R.id.login_btn:
+                mDialog = DialogUtils.createLoadingDialog(LoginActivity.this,"登录中...");
                 final BmobUser user = new BmobUser();
                 final String uName = mUsername.getText().toString();
                 final String pass = mPassword.getText().toString();
@@ -120,16 +125,19 @@ public class LoginActivity extends AppCompatActivity {
                             editor.apply();
                             //获取当前用户信息
                             User user1 = BmobUser.getCurrentUser(User.class);
+                            DialogUtils.closeDialog(mDialog);
                             Toast.makeText(LoginActivity.this,"登录成功",Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             intent.putExtra("name",uName);
                             startActivity(intent);
                             finish();
                         } else if (user == null) {
+                            DialogUtils.closeDialog(mDialog);
                             Snackbar snackbar = Snackbar.make(view, "未注册或用户名、密码错误", Snackbar.LENGTH_SHORT);
                             snackbar.getView().setBackgroundColor(getResources().getColor(R.color.green));
                             snackbar.show();
                         } else if (uName.equals(user.getName()) || pass.equals(user.getPassword())){
+                            DialogUtils.closeDialog(mDialog);
                             Snackbar snackbar = Snackbar.make(view, "用户名或密码错误", Snackbar.LENGTH_SHORT);
                             snackbar.getView().setBackgroundColor(getResources().getColor(R.color.green));
                             snackbar.show();

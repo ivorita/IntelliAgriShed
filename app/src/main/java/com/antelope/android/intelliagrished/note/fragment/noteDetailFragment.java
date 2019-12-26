@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -156,6 +157,7 @@ public class noteDetailFragment extends Fragment {
 
         if (mNoteBean.getDate_time() != null) {
             mTimerSelect.setText(mNoteBean.getDate_time());
+            mTimerSelect.setTextColor(getResources().getColor(R.color.black,getActivity().getTheme()));
         } else {
             mTimerSelect.setText("点击选择时间");
         }
@@ -268,6 +270,7 @@ public class noteDetailFragment extends Fragment {
                     @Override
                     public void handle(String time) {
                         mTimerSelect.setText(time);
+                        mTimerSelect.setTextColor(getResources().getColor(R.color.black,getActivity().getTheme()));
                         Log.d("noteDetail", "year: " + time.substring(0, 4));
 
                         //mNoteBean.setDate_time(time);

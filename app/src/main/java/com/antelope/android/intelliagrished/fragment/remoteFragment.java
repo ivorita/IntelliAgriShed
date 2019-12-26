@@ -369,7 +369,7 @@ public class remoteFragment extends Fragment {
                         }
                         break;
                     case 0x0008: // 继电器8 通风机 开启的消息句柄
-                        Animation rotate = AnimationUtils.loadAnimation(getContext(), R.anim.fan_rotate);
+                        Animation rotate = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_animation);
                         if (rotate != null) {
                             mFan.setImageResource(R.drawable.fan_on);
                             mFan.startAnimation(rotate);
@@ -423,7 +423,7 @@ public class remoteFragment extends Fragment {
                         }
                         break;
                     case 0x000c: // 继电器12 1号暖风机 开启的消息句柄
-                        Animation rotate_w1 = AnimationUtils.loadAnimation(getContext(), R.anim.fan_rotate);
+                        Animation rotate_w1 = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_animation);
                         if (rotate_w1 != null) {
                             mWarmAir1.setImageResource(R.drawable.warm_air_on);
                             mWarmAir1.startAnimation(rotate_w1);
@@ -446,7 +446,7 @@ public class remoteFragment extends Fragment {
                         }
                         break;
                     case 0x000d: // 继电器13 2号暖风机 开启的消息句柄
-                        Animation rotate_w2 = AnimationUtils.loadAnimation(getContext(), R.anim.fan_rotate);
+                        Animation rotate_w2 = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_animation);
                         if (rotate_w2 != null) {
                             mWarmAir2.setImageResource(R.drawable.warm_air_on);
                             mWarmAir2.startAnimation(rotate_w2);
